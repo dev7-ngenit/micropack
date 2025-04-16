@@ -11,7 +11,7 @@ import {
 
 export function Links() {
   return (
-    <Menubar className='ml-3'>
+    <Menubar className="ml-3 hidden md:flex">
       <MenubarMenu>
         <MenubarTrigger>Computer Accessories </MenubarTrigger>
 
