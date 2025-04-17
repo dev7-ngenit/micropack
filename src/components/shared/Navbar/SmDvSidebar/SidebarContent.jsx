@@ -7,7 +7,7 @@ import {
 
 export default function SidebarContent() {
   return (
-    <Accordion type="single" collapsible className="w-full px-4">
+    <Accordion type="single" collapsible className="box-border w-full px-4">
       <AccordionItem value="item-1">
         <AccordionTrigger className="text-base">
           Computer Accessories
