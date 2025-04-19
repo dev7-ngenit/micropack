@@ -125,3 +125,10 @@
     box-sizing: content-box;
   }
 }
+
+@layer utilities {
+  .container {
+    @apply w-full;
+    @apply mx-auto md:max-w-[1116px];
+  }
+}
