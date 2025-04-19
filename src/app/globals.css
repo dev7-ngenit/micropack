@@ -128,8 +128,7 @@
 
 @layer utilities {
   .container {
-    @apply w-full;
-    @apply mx-auto md:max-w-[1116px];
+    @apply mx-auto my-16 md:my-28 w-full md:max-w-[1116px];
   }
 
   .button-primary {

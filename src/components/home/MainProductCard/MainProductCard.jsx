@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function MainProductCard() {
   return (
-    <div className="container my-20 box-border flex flex-col px-5 md:mx-auto md:flex-row">
+    <div className="container my-20 box-border flex flex-col px-5 md:mx-auto md:flex-row md:px-0">
       <Image
         src="/mouse.jpg"
         width={560}
