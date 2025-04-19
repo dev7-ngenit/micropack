@@ -13,7 +13,7 @@ export function Links() {
   return (
     <Menubar className="ml-3 hidden md:flex">
       <MenubarMenu>
-        <MenubarTrigger>Computer Accessories </MenubarTrigger>
+        <MenubarTrigger className='font-bold text-xl'>Computer Accessories </MenubarTrigger>
 
         <MenubarContent className="mt-3 ml-1">
           <MenubarItem>Computer Mouse</MenubarItem>
@@ -29,7 +29,7 @@ export function Links() {
       </MenubarMenu>
 
       <MenubarMenu>
-        <MenubarTrigger>Cell Phone Accessories</MenubarTrigger>
+        <MenubarTrigger className='font-bold text-xl'>Cell Phone Accessories</MenubarTrigger>
 
         <MenubarContent className="mt-3 ml-1">
           <MenubarItem>Charging Blocks</MenubarItem>
@@ -40,11 +40,11 @@ export function Links() {
       </MenubarMenu>
 
       <MenubarMenu>
-        <MenubarTrigger>Lifestyle Series</MenubarTrigger>
+        <MenubarTrigger className='font-bold text-xl'>Lifestyle Series</MenubarTrigger>
       </MenubarMenu>
 
       <MenubarMenu>
-        <MenubarTrigger>Business Corporation</MenubarTrigger>
+        <MenubarTrigger className='font-bold text-xl'>Business Corporation</MenubarTrigger>
 
         <MenubarContent className="mt-3 ml-1">
           <MenubarItem>About Micropack</MenubarItem>
