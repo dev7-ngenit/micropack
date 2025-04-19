@@ -20,7 +20,7 @@ export default function MainProductCard() {
           Ergonomic Design with Smooth Thumb Control, 2.4G Wireless Connection.
         </p>
 
-        <Button className="mx-auto mt-3 block rounded-full bg-[rgb(47,158,207)] px-10 text-base [box-shadow:rgba(19,63,82,0.3)_0px_2.77725px_5.5545px_0px,rgba(19,63,82,0.15)_0px_5.5545px_11.109px_-2.77725px,rgb(30,101,132)_0px_-2.77725px_0px_0px_inset]">
+        <Button className="button-primary mx-auto mt-3 block cursor-pointer !px-10 text-base">
           Shop Now
         </Button>
       </div>
