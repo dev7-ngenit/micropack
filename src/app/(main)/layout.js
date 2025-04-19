@@ -1,17 +1,32 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "../globals.css";
 
 import Navbar from "@/components/shared/Navbar/Navbar";
 import Footer from "@/components/shared/Footer/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const neuzeitGrotesk = localFont({
+  src: [
+    {
+      path: "../fonts/neuzeit-grotesk/neuzeit-grotesk-Light.otf",
+      weight: "300",
+      style: "light",
+    },
+    {
+      path: "../fonts/neuzeit-grotesk/neuzeit-grotesk-Regular.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../fonts/neuzeit-grotesk/neuzeit-grotesk-Bold.ttf",
+      weight: "700",
+      style: "bold",
+    },
+    {
+      path: "../fonts/neuzeit-grotesk/neuzeit-grotesk-Black.otf",
+      weight: "900",
+      style: "black",
+    },
+  ],
 });
 
 export const metadata = {
@@ -22,9 +37,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} bg-[#EBEFF1] antialiased`}
-      >
+      <body className={`${neuzeitGrotesk.className} bg-[#EBEFF1] antialiased`}>
         <Navbar />
 
         {children}
