@@ -9,7 +9,7 @@ export default function Details() {
   const [quantity, setQuantity] = useState(1);
 
   return (
-    <div className="">
+    <div className="px-3">
       <h2 className="text-2xl font-semibold">
         Rechargeable 2.4GHz + Bluetooth Wireless Mouse ML-202W
       </h2>

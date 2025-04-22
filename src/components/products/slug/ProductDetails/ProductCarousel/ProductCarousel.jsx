@@ -8,6 +8,7 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
+import { DELAY } from "@/components/home/Hero/Hero";
 
 const productImages = [
   {
@@ -81,11 +82,11 @@ export default function ProductCarousel() {
   };
 
   return (
-    <section className="flex flex-none gap-x-5">
+    <section className="relative flex flex-none gap-x-5">
       {/* Thumbnail Carousel */}
       <Carousel
         orientation="vertical"
-        className="h-[37.5rem]"
+        className="hidden h-[37.5rem] md:block"
         opts={{
           containScroll: "keepSnaps",
           dragFree: false,
@@ -118,7 +119,7 @@ export default function ProductCarousel() {
 
       {/* Main Carousel */}
       <Carousel
-        className="w-full max-w-[37.5rem]"
+        className="mx-auto w-full max-w-[360px] drop-shadow-2xl sm:max-w-[385px] md:max-w-[37.5rem]"
         key="main-carousel"
         setApi={setMainCarouselApi}
         opts={{
@@ -129,19 +130,43 @@ export default function ProductCarousel() {
           {productImages.map((img, index) => (
             <CarouselItem
               key={index}
-              className="max-h-[37.5rem] max-w-[37.5rem]"
+              className="max-h-[360px] max-w-[360px] sm:max-h-[385px] sm:max-w-[385px] md:max-h-[37.5rem] md:max-w-[37.5rem]"
             >
               <Image
                 src={img.img}
                 alt=""
                 width={600}
                 height={600}
-                className="size-[37.5rem] rounded-2xl object-cover"
+                className="size-[360px] rounded-2xl object-cover sm:size-[385px] md:size-[37.5rem]"
               />
             </CarouselItem>
           ))}
         </CarouselContent>
       </Carousel>
+
+      {productImages?.length > 0 ? (
+        <div className="absolute -bottom-10 left-1/2 flex -translate-x-1/2 items-center justify-center gap-2 p-4 text-white md:hidden">
+          {Array.from({ length: productImages?.length }, (_, i) => (
+            <button
+              key={i}
+              className={cn(
+                "relative mx-1 inline-block w-2 h-2 cursor-pointer overflow-hidden rounded-full duration-300",
+                i === currentSlide ? "bg-black/70" : "bg-black/15",
+              )}
+              onClick={() => handleSlideChange(i)}
+            >
+              {i === currentSlide && (
+                <span
+                  className="absolute top-0 left-0 inline-block h-full bg-white"
+                  style={{
+                    animation: `grow ${DELAY}ms linear forwards`,
+                  }}
+                />
+              )}
+            </button>
+          ))}
+        </div>
+      ) : null}
     </section>
   );
 }
