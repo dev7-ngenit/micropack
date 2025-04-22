@@ -8,7 +8,6 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
-import { DELAY } from "@/components/home/Hero/Hero";
 
 const productImages = [
   {
@@ -145,23 +144,18 @@ export default function ProductCarousel() {
       </Carousel>
 
       {productImages?.length > 0 ? (
-        <div className="absolute -bottom-10 left-1/2 flex -translate-x-1/2 items-center justify-center gap-2 p-4 text-white md:hidden">
+        <div className="absolute -bottom-10 left-1/2 flex -translate-x-1/2 items-center justify-center gap-0.5 p-4 text-white md:hidden">
           {Array.from({ length: productImages?.length }, (_, i) => (
             <button
               key={i}
               className={cn(
-                "relative mx-1 inline-block w-2 h-2 cursor-pointer overflow-hidden rounded-full duration-300",
+                "relative mx-1 inline-block h-2 w-2 cursor-pointer overflow-hidden rounded-full duration-300",
                 i === currentSlide ? "bg-black/70" : "bg-black/15",
               )}
               onClick={() => handleSlideChange(i)}
             >
               {i === currentSlide && (
-                <span
-                  className="absolute top-0 left-0 inline-block h-full bg-white"
-                  style={{
-                    animation: `grow ${DELAY}ms linear forwards`,
-                  }}
-                />
+                <span className="absolute top-0 left-0 inline-block h-full bg-white" />
               )}
             </button>
           ))}
