@@ -1,3 +1,4 @@
+import MoreSeries from "@/components/products/slug/MoreSeries/MoreSeries";
 import ProductDescription from "@/components/products/slug/ProductDescription/ProductDescription";
 import ProductDetails from "@/components/products/slug/ProductDetails/ProductDetails";
 
@@ -7,6 +8,8 @@ export default function page() {
       <ProductDetails />
 
       <ProductDescription />
+
+      <MoreSeries />
     </main>
   );
 }
