@@ -81,7 +81,7 @@ export default function ProductCarousel() {
   };
 
   return (
-    <section className="flex gap-x-5">
+    <section className="flex flex-none gap-x-5">
       {/* Thumbnail Carousel */}
       <Carousel
         orientation="vertical"
@@ -94,9 +94,11 @@ export default function ProductCarousel() {
       >
         <CarouselContent className="mt-0 h-[37.5rem] w-[4.125rem] pr-2">
           {productImages.map((img, index) => (
-            <CarouselItem className="size-[4.125rem] basis-[14%] pt-0">
+            <CarouselItem
+              className="size-[4.125rem] basis-[14%] pt-0"
+              key={index}
+            >
               <Image
-                key={index}
                 src={img.img}
                 alt=""
                 width={66}
