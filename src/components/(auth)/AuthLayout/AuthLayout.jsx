@@ -3,7 +3,7 @@ import { Fingerprint } from "lucide-react";
 
 const AuthLayout = ({ children, title, subtitle }) => {
   return (
-    <div className="from-primary-50 to-secondary-50 my-10 flex items-center justify-center bg-gradient-to-br">
+    <div className="from-primary-50 to-secondary-50 my-10 flex items-center justify-center bg-gradient-to-br px-3 md:px-0">
       <div className="w-full max-w-lg overflow-hidden rounded-2xl bg-white shadow-card">
         {/* Auth header */}
         <div className="p-6 pb-0 md:p-8">
