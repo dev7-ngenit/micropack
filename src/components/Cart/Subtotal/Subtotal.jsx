@@ -7,7 +7,7 @@ export default function Subtotal() {
   const subtotal = 10; // Replace with actual subtotal calculation
 
   return (
-    <div className="h-[21.75rem] w-[16.5rem] rounded-lg bg-white px-9 py-7 shadow-lg">
+    <div className="h-[21.75rem] w-[19.8rem] md:w-[16.5rem] rounded-lg bg-white px-9 py-7 shadow-lg mt-10 md:mt-0">
       <div className="mb-6 flex items-baseline justify-between">
         <h2 className="text-lg font-medium text-gray-900">Subtotal</h2>
         <span className="text-lg font-medium text-gray-900">

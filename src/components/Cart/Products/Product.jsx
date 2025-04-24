@@ -12,18 +12,16 @@ export default function Product() {
   };
 
   return (
-    <div className="flex items-center justify-between border-b border-gray-200 py-6">
-      <div className="size-[100px] flex-shrink-0 overflow-hidden rounded-md border border-gray-200 bg-white">
+    <div className="flex w-full flex-col items-center justify-between overflow-hidden border-b border-gray-300 py-6 first-of-type:pt-0 md:w-full md:flex-row">
+      <div className="flex w-full items-center gap-x-8 md:w-auto">
         <Image
           src={"/charger.jpg"}
           alt={item.name}
           width={100}
           height={100}
-          className="size-[100px] object-cover object-center"
+          className="size-[100px] rounded-xl object-cover object-center"
         />
-      </div>
 
-      <div className="ml-4 flex grow items-center justify-between">
         <div className="text-base font-medium text-gray-900">
           <h3>{item.name}</h3>
 
@@ -31,10 +29,12 @@ export default function Product() {
             <p className="mt-1 text-sm text-gray-500">{item.color}</p>
           )}
         </div>
+      </div>
 
+      <div className="mt-4 flex w-full grow flex-wrap items-center justify-between md:mt-0 md:ml-4 md:w-auto">
         <p className="ml-4">${item.price.toFixed(2)}</p>
 
-        <div className="ml-6 flex items-center overflow-hidden rounded-full border border-gray-300">
+        <div className="-order-1 flex items-center overflow-hidden rounded-full border border-gray-300 md:ml-6">
           <button
             type="button"
             className="p-2 transition-colors hover:bg-gray-100"

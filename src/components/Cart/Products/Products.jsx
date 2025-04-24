@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Products() {
   return (
-    <section className="grow">
+    <section className="box-border grow mt-5 md:mt-0">
       {Array.from({ length: 3 }).map((_, index) => (
         <Product key={index} />
       ))}
