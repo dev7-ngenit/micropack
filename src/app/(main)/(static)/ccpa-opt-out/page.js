@@ -7,7 +7,7 @@ export default function page() {
         Do not sell my personal information
       </Title>
 
-      <section className="mt-10 flex flex-col gap-5 md:mt-16 text-xl">
+      <section className="mt-10 flex flex-col gap-5 text-xl md:mt-16">
         <p>
           As described in our Privacy Policy, we collect personal information
           from your interactions with us and our website, including through
@@ -20,11 +20,11 @@ export default function page() {
 
         <p>
           Sharing of personal information for targeted advertising based on your
-          interaction on different websites may be considered "sales",
-          "sharing", or "targeted advertising" under certain U.S. state privacy
-          laws. Depending on where you live, you may have the right to opt out
-          of these activities. If you would like to exercise this opt-out right,
-          please follow the instructions below.
+          interaction on different websites may be considered &quot;sales&quot;,
+          &quot;sharing&quot;, or &quot;targeted advertising&quot; under certain
+          U.S. state privacy laws. Depending on where you live, you may have the
+          right to opt out of these activities. If you would like to exercise
+          this opt-out right, please follow the instructions below.
         </p>
 
         <p>
@@ -36,7 +36,12 @@ export default function page() {
           visit our website.
         </p>
 
-        <strong className="font-bold">To opt out of the "sale" or "sharing" of your personal information collected using cookies and other device-based identifiers as described above, you must be browsing from one of the applicable US states referred to above.</strong>
+        <strong className="font-bold">
+          To opt out of the &quot;sale&quot; or &quot;sharing&quot; of your
+          personal information collected using cookies and other device-based
+          identifiers as described above, you must be browsing from one of the
+          applicable US states referred to above.
+        </strong>
       </section>
     </main>
   );

@@ -1,4 +1,4 @@
-import Details from "@/components/search/Details/Details";
+// import Details from "@/components/search/Details/Details";
 import NoContent from "@/components/search/NoContent";
 import Title from "@/components/shared/Title/Title";
 
@@ -15,7 +15,7 @@ export default async function page({ searchParams }) {
         </Title>
       )}
 
-      <Details />
+      {/* <Details /> */}
 
       {!q && <NoContent />}
     </main>

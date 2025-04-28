@@ -42,8 +42,9 @@ export default function page() {
         </p>
         <ul>
           <li className="list-disc">
-            To personalize user's experience and to allow us to deliver the type
-            of content and product offerings in which you are most interested.
+            To personalize user&apos;s experience and to allow us to deliver the
+            type of content and product offerings in which you are most
+            interested.
           </li>
           <li className="list-disc">
             To improve our website in order to better serve you.
@@ -68,17 +69,17 @@ export default function page() {
         submits, or accesses their information to maintain the safety of your
         personal information. All transactions are processed through a gateway
         provider and are not stored or processed on our servers. Do we use
-        'cookies'? Yes. Cookies are small files that a site or its service
-        provider transfers to your computer's hard drive through your Web
-        browser (if you allow) that enables the site's or service provider's
-        systems to recognize your browser and capture and remember certain
-        information. For instance, we use cookies to help us remember and
-        process the items in your shopping cart. They are also used to help us
-        understand your preferences based on previous or current site activity,
-        which enables us to provide you with improved services. We also use
-        cookies to help us compile aggregate data about site traffic and site
-        interaction so that we can offer better site experiences and tools in
-        the future.
+        &apos;cookies&apos;? Yes. Cookies are small files that a site or its
+        service provider transfers to your computer&apos;s hard drive through
+        your Web browser (if you allow) that enables the site&apos;s or service
+        provider&apos;s systems to recognize your browser and capture and
+        remember certain information. For instance, we use cookies to help us
+        remember and process the items in your shopping cart. They are also used
+        to help us understand your preferences based on previous or current site
+        activity, which enables us to provide you with improved services. We
+        also use cookies to help us compile aggregate data about site traffic
+        and site interaction so that we can offer better site experiences and
+        tools in the future.
       </section>
     </main>
   );
