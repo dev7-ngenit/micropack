@@ -1,11 +1,9 @@
-// import Details from "@/components/search/Details/Details";
+import Details from "@/components/search/Details/Details";
 import NoContent from "@/components/search/NoContent";
 import Title from "@/components/shared/Title/Title";
 
 export default async function page({ searchParams }) {
   const { q } = (await searchParams) || {};
-
-  console.log(q);
 
   return (
     <main className="container !mt-10 box-border px-5 md:!my-16 md:box-content md:min-h-[calc(100dvh-33rem)]">
@@ -15,7 +13,7 @@ export default async function page({ searchParams }) {
         </Title>
       )}
 
-      {/* <Details /> */}
+      <Details />
 
       {!q && <NoContent />}
     </main>
