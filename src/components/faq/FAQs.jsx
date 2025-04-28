@@ -7,18 +7,20 @@ import {
 
 const faqs = [
   {
-    question: "Is it accessible?",
-    answer: "Yes. It adheres to the WAI-ARIA design pattern.",
+    question: "Are Micropack power products certified?",
+    answer:
+      "Yes, all of our products are certified and have the appropriate markings.",
   },
   {
-    question: "Is it styled?",
+    question:
+      "Do power banks automatically turn on when they are plugged into a device?",
     answer:
-      "Yes. It comes with default styles that matches the other components&apos; aesthetic.",
+      "Yes, most of our power banks will begin charging as soon as it is plugged into the device.",
   },
   {
-    question: "Is it animated?",
+    question: "What does the power bank capacity mean?",
     answer:
-      "Yes. It's animated by default, but you can disable it if you prefer.",
+      "Capacity is measured in milliamperes (mAh) on power banks. As a general rule, the more mAh in the power bank, the more times you will be able to charge your device before having to charge the power bank again.",
   },
 ];
 
