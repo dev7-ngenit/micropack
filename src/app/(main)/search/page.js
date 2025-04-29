@@ -13,9 +13,9 @@ export default async function page({ searchParams }) {
         </Title>
       )}
 
-      <Details />
-
       {!q && <NoContent />}
+
+      <Details />
     </main>
   );
 }
