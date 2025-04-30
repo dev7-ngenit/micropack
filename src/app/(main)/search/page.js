@@ -3,19 +3,19 @@ import NoContent from "@/components/search/NoContent";
 import Title from "@/components/shared/Title/Title";
 
 export default async function page({ searchParams }) {
-  const { q } = (await searchParams) || {};
+  const { query } = (await searchParams) || {};
 
   return (
     <main className="container !mt-10 box-border px-5 md:!my-16 md:box-content md:min-h-[calc(100dvh-33rem)]">
-      {q && (
+      {query && (
         <Title className="text-4xl [background-position-y:70%]">
-          Search for “{q}”
+          Search for “{query}”
         </Title>
       )}
 
-      {!q && <NoContent />}
+      {!query && <NoContent />}
 
-      <Details />
+      {query && <Details searchParams={searchParams} />}
     </main>
   );
 }
