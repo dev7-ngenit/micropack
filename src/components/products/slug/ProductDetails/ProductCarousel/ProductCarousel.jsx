@@ -1,13 +1,13 @@
 "use client";
 
-import Image from "next/image";
-import { useEffect, useState } from "react";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const productImages = [
   {
@@ -48,7 +48,7 @@ const productImages = [
   },
 ];
 
-export default function ProductCarousel() {
+export default function ProductCarousel({ thumbnail_image }) {
   // State to hold the carousel API instances
   const [mainCarouselApi, setMainCarouselApi] = useState(null);
   const [thumbCarouselApi, setThumbCarouselApi] = useState(null);
@@ -83,7 +83,7 @@ export default function ProductCarousel() {
   return (
     <section className="relative flex flex-none gap-x-5">
       {/* Thumbnail Carousel */}
-      <Carousel
+      {/* <Carousel
         orientation="vertical"
         className="hidden h-[37.5rem] md:block"
         opts={{
@@ -114,7 +114,7 @@ export default function ProductCarousel() {
             </CarouselItem>
           ))}
         </CarouselContent>
-      </Carousel>
+      </Carousel> */}
 
       {/* Main Carousel */}
       <Carousel
@@ -132,10 +132,12 @@ export default function ProductCarousel() {
               className="max-h-[360px] max-w-[360px] sm:max-h-[385px] sm:max-w-[385px] md:max-h-[37.5rem] md:max-w-[37.5rem]"
             >
               <Image
-                src={img.img}
+                src={thumbnail_image}
                 alt=""
                 width={600}
                 height={600}
+                placeholder="blur"
+                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNMTBapBwADXgFZa0QxdgAAAABJRU5ErkJggg=="
                 className="size-[360px] rounded-2xl object-cover sm:size-[385px] md:size-[37.5rem]"
               />
             </CarouselItem>

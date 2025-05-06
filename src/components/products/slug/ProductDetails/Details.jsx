@@ -2,19 +2,21 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { FaMinus } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa";
+import { FaMinus } from "react-icons/fa6";
 
-export default function Details() {
+export default function Details({ data }) {
   const [quantity, setQuantity] = useState(1);
+
+  const { name, price } = data || {};
+
+  console.log("🚀 ~ Details ~ data:", data);
 
   return (
     <div className="px-3">
-      <h2 className="text-2xl font-semibold">
-        Rechargeable 2.4GHz + Bluetooth Wireless Mouse ML-202W
-      </h2>
+      <h2 className="text-2xl font-semibold">{name}</h2>
 
-      <p className="mt-5 text-3xl">$36.90</p>
+      <p className="mt-5 text-3xl">${price}</p>
 
       <div className="mt-3">
         <p className="mb-1 text-lg text-gray-500">
