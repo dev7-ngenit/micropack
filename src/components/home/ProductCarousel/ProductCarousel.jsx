@@ -13,10 +13,9 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import Link from "next/link";
 
 export default function ProductCarousel({ title, products = [] }) {
-  // console.log(title, products);
-
   return (
     <section className="container">
       <Title className="mb-5 ml-3 text-2xl font-semibold">{title}</Title>
@@ -25,8 +24,14 @@ export default function ProductCarousel({ title, products = [] }) {
         <Carousel className="h-[20rem] pt-0" opts={{ align: "start" }}>
           <CarouselContent className="mt-0 flex h-[19.5rem] gap-2 px-2 pt-4 md:px-0">
             {products.map((product) => {
-              const { id } = product;
-              console.log(product);
+              const {
+                id,
+                name,
+                slug,
+                price,
+                thumbnail_image,
+                thumbnail_image_2,
+              } = product || {};
 
               return (
                 <CarouselItem
@@ -37,12 +42,19 @@ export default function ProductCarousel({ title, products = [] }) {
                     <ProductImage
                       width={207}
                       height={207}
+                      alt={name}
+                      src1={thumbnail_image}
+                      src2={thumbnail_image_2}
                       className="h-[207px] w-[207px]"
                     />
 
                     <ProductDescription className="pb-4">
-                      <ProductTitle>Product Title</ProductTitle>
-                      <ProductPrice price={99.99} className="text-gray-800" />
+                      <ProductTitle className="truncate">
+                        <Link href={`/products/${slug}`}>{name}</Link>
+                      </ProductTitle>
+                      <ProductPrice className="text-gray-800">
+                        $<span className="ml-0.5">{price}</span>
+                      </ProductPrice>
                     </ProductDescription>
                   </ProductCard>
                 </CarouselItem>

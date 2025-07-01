@@ -16,9 +16,8 @@ export function ProductCard({ children, className }) {
 
 export function ProductImage({
   src1 = "/charger.jpg",
-  alt1 = "product 1",
+  alt = "product 1",
   src2 = "/mouse.jpg",
-  alt2 = "product 2",
   width = 268,
   height = 268,
   className,
@@ -29,14 +28,14 @@ export function ProductImage({
     <div className="group relative h-fit w-fit overflow-hidden rounded-3xl">
       <Image
         src={src1}
-        alt={alt1}
+        alt={alt}
         width={width}
         height={height}
         className={cn(imageSize, className)}
       />
       <Image
         src={src2}
-        alt={alt2}
+        alt={alt}
         width={width}
         height={height}
         className={cn(
@@ -60,8 +59,6 @@ export function ProductTitle({ children, className }) {
   );
 }
 
-export function ProductPrice({ price, className }) {
-  return (
-    <p className={cn(" text-gray-800 font-bold", className)}>${price}</p>
-  );
+export function ProductPrice({ children, className }) {
+  return <p className={cn("font-bold text-gray-800", className)}>{children}</p>;
 }

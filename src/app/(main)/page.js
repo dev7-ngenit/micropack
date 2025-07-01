@@ -1,9 +1,10 @@
 import CarouselSectionOne from "@/components/home/CarouselSectionOne/CarouselSectionOne";
+import CarouselSectionThree from "@/components/home/CarouselSectionThree/CarouselSectionThree";
+import CarouselSectionTwo from "@/components/home/CarouselSectionTwo/CarouselSectionTwo";
 import Hero from "@/components/home/Hero/Hero";
 import MainProductCard from "@/components/home/MainProductCard/MainProductCard";
-import ProductCarousel from "@/components/home/ProductCarousel/ProductCarousel";
-import ProductCTA from "@/components/home/ProductCTA/ProductCTA";
 import ProductCTAOne from "@/components/home/ProductCTAOne/ProductCTAOne";
+import ProductCTATwo from "@/components/home/ProductCTATwo/ProductCTATwo";
 
 export default function Home() {
   return (
@@ -16,9 +17,11 @@ export default function Home() {
 
       <ProductCTAOne />
 
-      <ProductCarousel />
+      <CarouselSectionTwo />
 
-      <ProductCTA />
+      <ProductCTATwo />
+
+      <CarouselSectionThree />
     </main>
   );
 }
