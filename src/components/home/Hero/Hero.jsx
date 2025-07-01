@@ -1,14 +1,14 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
-import Autoplay from "embla-carousel-autoplay";
+import useAxiosSecure from "@/app/hooks/useAxiosSecure";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
-import useAxiosSecure from "@/app/hooks/useAxiosSecure";
+import Autoplay from "embla-carousel-autoplay";
+import { useEffect, useRef, useState } from "react";
 
 const DELAY = 3000;
 
@@ -42,7 +42,7 @@ export default function Hero() {
   useEffect(() => {
     const fetchBanner = async () => {
       try {
-        const response = await axios.get("/home-sliders");
+        const response = await axios.get("/v1/home-sliders");
         setSlides(response.data?.data);
       } catch (error) {
         console.error("Error fetching data:", error);

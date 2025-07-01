@@ -1,14 +1,15 @@
 import Image from "next/image";
+import Link from "next/link";
 
-export default function ProductCTA() {
+export default function ProductCTA({ image, href = "/search" }) {
   return (
-    <section className="container mx-auto">
+    <Link href={href} className="container mx-auto block">
       <Image
-        src="/mouse.jpg"
+        src={image}
         width={1116}
         height={618}
-        className="h-[13.25rem] w-[24.063rem] md:h-[38.625rem] md:w-full mx-auto rounded-2xl"
+        className="mx-auto h-[13.25rem] w-[24.063rem] rounded-2xl object-cover md:h-[38.625rem] md:w-full"
       />
-    </section>
+    </Link>
   );
 }
