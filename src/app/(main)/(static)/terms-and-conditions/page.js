@@ -3,6 +3,11 @@ import Title from "@/components/shared/Title/Title";
 export default async function page() {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_ORIGIN}/v1/terms-and-condition`,
+    {
+      next: {
+        revalidate: 60 * 60 * 24,
+      },
+    },
   );
   const { data } = await response.json();
 
