@@ -19,10 +19,10 @@ export default function Support() {
           About Us
         </Link>
         <Link
-          href="/shipping-policy"
+          href="/buying-policy"
           className="w-fit cursor-pointer duration-300 hover:text-[#EBEFF1]"
         >
-          Shipping Policy
+          Buying Policy
         </Link>
         <Link
           href="/refund-policy"

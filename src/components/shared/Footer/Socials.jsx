@@ -1,7 +1,6 @@
 import { Input } from "@/components/ui/input";
-import { FaFacebookF, FaInstagram } from "react-icons/fa6";
+import { FaArrowRightLong, FaFacebookF, FaInstagram } from "react-icons/fa6";
 import { FiYoutube } from "react-icons/fi";
-import { FaArrowRightLong } from "react-icons/fa6";
 
 export default function Socials() {
   return (
@@ -22,9 +21,9 @@ export default function Socials() {
       </p>
 
       <div className="mt-4 flex items-center gap-x-2 text-xl">
-        <FaFacebookF />
-        <FaInstagram />
-        <FiYoutube />
+        <FaFacebookF className="cursor-pointer hover:text-white" />
+        <FaInstagram className="-ml-1 cursor-pointer text-2xl hover:text-white" />
+        <FiYoutube className="cursor-pointer text-[1.75rem] hover:text-white" />
       </div>
     </div>
   );
