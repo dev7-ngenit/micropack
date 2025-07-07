@@ -2,6 +2,7 @@ import MoreSeries from "@/components/products/slug/MoreSeries/MoreSeries";
 import NoContent from "@/components/products/slug/NoContent/NoContent";
 import ProductDescription from "@/components/products/slug/ProductDescription/ProductDescription";
 import ProductDetails from "@/components/products/slug/ProductDetails/ProductDetails";
+import { notFound } from "next/navigation";
 
 export default async function page({ params }) {
   const { slug } = await params;
@@ -23,14 +24,7 @@ export default async function page({ params }) {
         </main>
       );
     } else {
-      return (
-        <main className="container !my-16 md:min-h-[calc(100dvh-33rem)]">
-          <NoContent
-            title="Product not found"
-            subtitle={`The product with name ${slug} was not found`}
-          />
-        </main>
-      );
+      notFound();
     }
   } catch (error) {
     console.log("🚀 ~ page ~ error:", error);
