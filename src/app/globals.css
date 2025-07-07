@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
+@plugin "tailwindcss-motion";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -136,8 +137,8 @@
 
   .button-primary {
     @apply rounded-full bg-[#2f9ecf] px-5 py-2 hover:bg-[#2A8EBA];
-    box-shadow: rgba(19, 63, 82, 0.3) 0px 2.77725px 5.5545px 0px, 
-                rgba(19, 63, 82, 0.15) 0px 5.5545px 11.109px -2.77725px, 
-                rgb(30, 101, 132) 0px -2.77725px 0px 0px inset;
+    box-shadow: rgba(19, 63, 82, 0.3) 0px 2.77725px 5.5545px 0px,
+      rgba(19, 63, 82, 0.15) 0px 5.5545px 11.109px -2.77725px,
+      rgb(30, 101, 132) 0px -2.77725px 0px 0px inset;
   }
 }

@@ -3,6 +3,7 @@ import "../globals.css";
 
 import Footer from "@/components/shared/Footer/Footer";
 import Navbar from "@/components/shared/Navbar/Navbar";
+import { Toaster } from "react-hot-toast";
 
 const neuzeitGrotesk = localFont({
   src: [
@@ -43,6 +44,8 @@ export default function RootLayout({ children }) {
         {children}
 
         <Footer />
+
+        <Toaster position="top-right" reverseOrder={false} />
       </body>
     </html>
   );
