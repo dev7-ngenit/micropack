@@ -4,9 +4,7 @@ export default async function page() {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_ORIGIN}/v1/return-policy`,
     {
-      next: {
-        revalidate: 60 * 60 * 24,
-      },
+      cache: "no-store",
     },
   );
   const { data } = await response.json();
@@ -17,9 +15,10 @@ export default async function page() {
         Refund Policy
       </Title>
 
-      <section className="prose mt-10 flex max-w-full flex-col gap-5 md:mt-16">
-        {data?.content}
-      </section>
+      <section
+        className="prose mt-10 max-w-full md:mt-16"
+        dangerouslySetInnerHTML={{ __html: data?.content }}
+      />
     </main>
   );
 }
