@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Pagination,
   PaginationContent,
@@ -6,39 +8,22 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { usePathname, useSearchParams } from "next/navigation";
 
-export default function PaginationCom({ searchParams, total }) {
-  // Parse page from searchParams, default to 1 if missing or invalid
-  const currentPage = parseInt(searchParams?.page || "1", 10);
-  const totalPages = total || 10;
+export default function PaginationCom({ current = 1, total = 1 }) {
+  const path = usePathname();
+  const searchParams = useSearchParams();
+
+  const currentPage = parseInt(current);
+  const totalPages = parseInt(total);
 
   // Function to create URL with preserved query params
   const createPageUrl = (pageNum) => {
-    // Create a plain object from searchParams
-    const params = {};
+    const params = new URLSearchParams(searchParams);
 
-    // Copy all existing params
-    if (searchParams) {
-      Object.keys(searchParams).forEach((key) => {
-        // Skip Symbol entries and only include string values
-        if (typeof key === "string" && typeof searchParams[key] === "string") {
-          params[key] = searchParams[key];
-        }
-      });
-    }
+    params.set("page", pageNum);
 
-    // Update or add page parameter
-    params.page = pageNum.toString();
-
-    // Convert to query string
-    const queryString = Object.entries(params)
-      .map(
-        ([key, value]) =>
-          `${encodeURIComponent(key)}=${encodeURIComponent(value)}`,
-      )
-      .join("&");
-
-    return `?${queryString}`;
+    return `${path}?${params.toString()}`;
   };
 
   // Calculate page range to display (always show 5 pages if possible)

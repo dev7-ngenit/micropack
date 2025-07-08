@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    remotePatterns: [new URL("https://ims.ngengroup.org/**")],
+    domains: ["accessories.ngengroup.org"],
+    remotePatterns: [new URL("https://accessories.ngengroup.org/**")],
   },
 };
 

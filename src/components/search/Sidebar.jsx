@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -10,13 +9,37 @@ import {
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
 
 export default function Sidebar() {
-  const [openedFilters, setOpenedFilters] = useState(["availability", "price"]);
   const [value, setValue] = useState([0, 699]);
+  const [stockStatus, setStockStatus] = useState(null);
+
+  const queryParams = useSearchParams();
+  const router = useRouter();
+
+  const handleStockChange = (type, value) => {
+    const params = new URLSearchParams(queryParams.toString());
+
+    if (value) {
+      setStockStatus(type);
+      params.set("stock", type === "in-stock" ? 1 : 0);
+    } else {
+      setStockStatus(null);
+      params.delete("stock");
+    }
+
+    router.push(`/search?${params.toString()}`);
+  };
 
   const handleChangePriceRange = (value) => {
-    console.log(value);
+    const params = new URLSearchParams(queryParams.toString());
+
+    params.set("price_min", value[0]);
+    params.set("price_max", value[1]);
+
+    router.push(`/search?${params.toString()}`);
   };
 
   return (
@@ -24,7 +47,7 @@ export default function Sidebar() {
       <Accordion
         type="multiple"
         className="w-full"
-        defaultValue={openedFilters}
+        defaultValue={["availability", "price"]}
       >
         <AccordionItem value="availability" className="border-slate-300">
           <AccordionTrigger className="pt-0 text-xl font-semibold hover:cursor-pointer hover:no-underline">
@@ -35,28 +58,36 @@ export default function Sidebar() {
             <div className="flex items-center space-x-2 pt-1 pl-1">
               <Checkbox
                 id="in-stock"
-                className="border-2 border-black/50 focus-visible:ring-[#3EAFE1] data-[state=checked]:border-[#3EAFE1] data-[state=checked]:bg-[#3EAFE1]"
+                className="cursor-pointer border-2 border-black/50 focus-visible:ring-[#3EAFE1] data-[state=checked]:border-[#3EAFE1] data-[state=checked]:bg-[#3EAFE1]"
+                checked={stockStatus === "in-stock"}
+                onCheckedChange={(value) =>
+                  handleStockChange("in-stock", value)
+                }
               />
               <Label
                 htmlFor="in-stock"
                 className="flex w-full items-center justify-between peer-has-checked:text-blue-300"
               >
                 <span className="text-base">In Stock</span>
-                <span className="text-xs text-gray-500">56</span>
+                {/* <span className="text-xs text-gray-500">56</span> */}
               </Label>
             </div>
 
             <div className="mt-1 flex items-center space-x-2 pt-1 pl-1">
               <Checkbox
                 id="out-of-stock"
-                className="border-2 border-black/50 focus-visible:ring-[#3EAFE1] data-[state=checked]:border-[#3EAFE1] data-[state=checked]:bg-[#3EAFE1]"
+                className="cursor-pointer border-2 border-black/50 focus-visible:ring-[#3EAFE1] data-[state=checked]:border-[#3EAFE1] data-[state=checked]:bg-[#3EAFE1]"
+                checked={stockStatus === "out-of-stock"}
+                onCheckedChange={(value) =>
+                  handleStockChange("out-of-stock", value)
+                }
               />
               <Label
                 htmlFor="out-of-stock"
                 className="flex w-full items-center justify-between peer-has-checked:text-blue-300"
               >
                 <span className="text-base">Out Of Stock</span>
-                <span className="text-xs text-gray-500">6</span>
+                {/* <span className="text-xs text-gray-500">6</span> */}
               </Label>
             </div>
           </AccordionContent>
