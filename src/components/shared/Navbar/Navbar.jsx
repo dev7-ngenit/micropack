@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import Link from "next/link";
+import { Suspense } from "react";
 import CenterLinks from "./CenterLinks";
 import NavIcons from "./NavIcons";
 import SearchBar from "./SearchBar";
@@ -17,7 +18,9 @@ export default function Navbar() {
 
       <CenterLinks />
 
-      <SearchBar />
+      <Suspense fallback={<div>Loading...</div>}>
+        <SearchBar />
+      </Suspense>
 
       <NavIcons />
     </nav>

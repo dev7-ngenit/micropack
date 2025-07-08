@@ -34,7 +34,6 @@ export default function SearchBar() {
         value={queryValue}
         onChange={(e) => setQueryValue(e.target.value)}
       />
-
       <button
         type="submit"
         className="absolute top-1/2 right-1 -translate-y-1/2 cursor-pointer md:right-7"

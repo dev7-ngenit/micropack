@@ -1,12 +1,12 @@
 "use client";
 
-import Link from "next/link";
-import React, { useState } from "react";
 import AuthLayout from "@/components/(auth)/AuthLayout/AuthLayout";
 import Button from "@/components/(auth)/Button/Button";
 import FormField from "@/components/(auth)/FormField/FormField";
+import Link from "next/link";
+import { Suspense, useState } from "react";
 
-const ForgotPasswordPage = () => {
+const ForgotPasswordPageContent = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -94,4 +94,10 @@ const ForgotPasswordPage = () => {
   );
 };
 
-export default ForgotPasswordPage;
+export default function ForgotPasswordPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ForgotPasswordPageContent />
+    </Suspense>
+  );
+}

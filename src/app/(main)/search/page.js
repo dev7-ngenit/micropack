@@ -28,10 +28,10 @@ export default async function page({ searchParams }) {
 
       <SearchNav totalResults={total} sortBy={sortby} />
 
-      <section className="mt-9 flex items-start gap-x-12">
-        <Sidebar />
+      <Suspense fallback={<div>Loading...</div>}>
+        <section className="mt-9 flex items-start gap-x-12">
+          <Sidebar />
 
-        <Suspense fallback={<div>Loading...</div>}>
           <section className="grow">
             <Products products={data} />
             <PaginationCom
@@ -39,8 +39,8 @@ export default async function page({ searchParams }) {
               total={Math.ceil(total / per_page)}
             />
           </section>
-        </Suspense>
-      </section>
+        </section>
+      </Suspense>
     </main>
   );
 }

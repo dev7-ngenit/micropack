@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { Suspense } from "react";
 import Dropdown from "./SearchNav/Dropdown";
 
 export default function SearchNav({ totalResults, sortBy }) {
@@ -13,7 +14,9 @@ export default function SearchNav({ totalResults, sortBy }) {
 
       <div className="flex items-center gap-x-3 text-lg text-gray-900/50">
         Sort by:
-        <Dropdown sortBy={sortBy} />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Dropdown sortBy={sortBy} />
+        </Suspense>
       </div>
     </nav>
   );
