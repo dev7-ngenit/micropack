@@ -8,19 +8,13 @@ import ProductCTATwo from "@/components/home/ProductCTATwo/ProductCTATwo";
 
 export default function Home() {
   return (
-    <main>
+    <main className="md:min-h-[calc(100dvh-33rem)]">
       <Hero />
-
       <MainProductCard />
-
       <CarouselSectionOne />
-
       <ProductCTAOne />
-
       <CarouselSectionTwo />
-
       <ProductCTATwo />
-
       <CarouselSectionThree />
     </main>
   );

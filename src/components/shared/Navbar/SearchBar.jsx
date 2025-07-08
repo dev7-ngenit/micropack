@@ -2,27 +2,24 @@
 
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Input } from "@/components/ui/input";
-import { redirect, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
-import toast from "react-hot-toast";
 import { IoSearchOutline } from "react-icons/io5";
 import { MdError } from "react-icons/md";
 
 export default function SearchBar() {
+  const router = useRouter();
   const queryParams = useSearchParams();
   const [queryValue, setQueryValue] = useState(queryParams.get("query") || "");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (e.target.search.value === "") {
-      return toast.custom(<Modal />);
-    } else {
-      const params = new URLSearchParams();
-      params.set("query", e.target.search.value);
+    const params = new URLSearchParams(queryParams.toString());
 
-      redirect(`/search?${params.toString()}`);
-    }
+    params.set("query", queryValue);
+
+    router.push(`/search?${params.toString()}`);
   };
 
   return (

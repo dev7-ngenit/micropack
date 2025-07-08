@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import Link from "next/link";
-import { Links } from "./Links";
+import CenterLinks from "./CenterLinks";
 import NavIcons from "./NavIcons";
 import SearchBar from "./SearchBar";
 import SmDvSidebar from "./SmDvSidebar/SmDvSidebar";
@@ -15,7 +15,7 @@ export default function Navbar() {
         <Image src="/logo.png" alt="logo" width={160} height={46} priority />
       </Link>
 
-      <Links />
+      <CenterLinks />
 
       <SearchBar />
 
