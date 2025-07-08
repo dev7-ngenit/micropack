@@ -5,6 +5,7 @@ import Footer from "@/components/shared/Footer/Footer";
 import Navbar from "@/components/shared/Navbar/Navbar";
 import { Suspense } from "react";
 import { Toaster } from "react-hot-toast";
+import CartProvider from "./providers/CartProvider";
 
 const neuzeitGrotesk = localFont({
   src: [
@@ -40,11 +41,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${neuzeitGrotesk.className} bg-[#EBEFF1] antialiased`}>
-        <Navbar />
+        <CartProvider>
+          <Navbar />
 
-        <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+          <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
 
-        <Footer />
+          <Footer />
+        </CartProvider>
 
         <Toaster position="top-right" reverseOrder={false} />
       </body>
