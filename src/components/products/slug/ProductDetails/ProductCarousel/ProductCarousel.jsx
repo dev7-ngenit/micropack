@@ -48,7 +48,7 @@ const productImages = [
   },
 ];
 
-export default function ProductCarousel({ thumbnail_image }) {
+export default function ProductCarousel({ thumbnail_image, alt }) {
   // State to hold the carousel API instances
   const [mainCarouselApi, setMainCarouselApi] = useState(null);
   const [thumbCarouselApi, setThumbCarouselApi] = useState(null);
@@ -122,7 +122,7 @@ export default function ProductCarousel({ thumbnail_image }) {
         key="main-carousel"
         setApi={setMainCarouselApi}
         opts={{
-          loop: true,
+          loop: false,
         }}
       >
         <CarouselContent>

@@ -5,7 +5,10 @@ export default function ProductDescription({ description }) {
     <section className="mx-3 mt-14 min-h-40 md:mx-0">
       <Title>Description</Title>
 
-      <div className="mt-2">{description}</div>
+      <div
+        className="prose mt-2 max-w-full"
+        dangerouslySetInnerHTML={{ __html: description }}
+      ></div>
     </section>
   );
 }

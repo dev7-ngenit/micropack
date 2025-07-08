@@ -10,8 +10,6 @@ export default function Details({ data }) {
 
   const { name, price } = data || {};
 
-  console.log("🚀 ~ Details ~ data:", data);
-
   return (
     <div className="px-3">
       <h2 className="text-2xl font-semibold">{name}</h2>
