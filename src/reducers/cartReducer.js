@@ -1,4 +1,4 @@
-export const cartAction = {
+export const cartActions = {
   loadCart: "LOAD_CART",
   addToCart: "ADD_TO_CART",
   decreaseQuantity: "DECREASE_QUANTITY",
@@ -12,30 +12,43 @@ export default function cartReducer(state, action) {
     }
 
     case "ADD_TO_CART": {
-      const existingItem = state.cart.find(
-        (item) => item.id === action.payload.id,
-      );
+      console.log("from reducer", state);
+      const existingItem = state.find((item) => item.id === action.payload.id);
+
+      let nextState;
+
+      console.log("from reducer", existingItem);
 
       if (existingItem?.id) {
-        return state.cart.map((item) =>
+        nextState = state.map((item) =>
           item.id === action.payload.id
             ? { ...item, quantity: item.quantity + 1 }
             : item,
         );
+      } else {
+        nextState = [...state, { ...action.payload }];
       }
-      return [...state.cart, { ...action.payload }];
+
+      localStorage.setItem("cart", JSON.stringify(nextState));
+      return nextState;
     }
 
     case "DECREASE_QUANTITY": {
-      return state.cart.map((item) =>
+      const nextState = state.map((item) =>
         item.id === action.payload.id
           ? { ...item, quantity: item.quantity - action.payload?.quantity || 1 }
           : item,
       );
+
+      localStorage.setItem("cart", JSON.stringify(nextState));
+      return nextState;
     }
 
     case "REMOVE_FROM_CART": {
-      return state.cart.filter((item) => item.id !== action.payload.id);
+      const nextState = state.filter((item) => item.id !== action.payload.id);
+
+      localStorage.setItem("cart", JSON.stringify(nextState));
+      return nextState;
     }
 
     default: {

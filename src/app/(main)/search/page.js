@@ -3,19 +3,21 @@ import Products from "@/components/search/Products";
 import SearchNav from "@/components/search/SearchNav";
 import Sidebar from "@/components/search/Sidebar";
 import Title from "@/components/shared/Title/Title";
+import rmNullishValues from "@/lib/rmNullishValues";
 import { Suspense } from "react";
 
 export default async function page({ searchParams }) {
   const { query, sortby, ...rest } = (await searchParams) || {};
 
-  const params = new URLSearchParams({ name: query, sort_by: sortby, ...rest });
-
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_ORIGIN}/v1/products?${params.toString()}`,
-    {
-      cache: "no-store",
-    },
+  const params = new URLSearchParams(
+    rmNullishValues({ name: query, sort_by: sortby, ...rest }),
   );
+
+  const link = `${process.env.NEXT_PUBLIC_BACKEND_ORIGIN}/v1/products?${params.toString()}`;
+
+  const response = await fetch(link, {
+    cache: "no-store",
+  });
   const { current_page, total, data, per_page } = await response.json();
 
   return (

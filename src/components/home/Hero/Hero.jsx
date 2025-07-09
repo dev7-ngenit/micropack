@@ -1,11 +1,11 @@
 "use client";
 
-import useAxiosSecure from "@/app/hooks/useAxiosSecure";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { cn } from "@/lib/utils";
 import Autoplay from "embla-carousel-autoplay";
 import { useEffect, useRef, useState } from "react";

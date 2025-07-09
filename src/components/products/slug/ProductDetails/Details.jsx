@@ -1,13 +1,7 @@
-"use client";
-
 import Image from "next/image";
-import { useState } from "react";
-import { FaPlus } from "react-icons/fa";
-import { FaMinus } from "react-icons/fa6";
+import Actions from "./Actions";
 
 export default function Details({ data }) {
-  const [quantity, setQuantity] = useState(1);
-
   const { name, price } = data || {};
 
   return (
@@ -66,25 +60,7 @@ export default function Details({ data }) {
         </div>
       </div>
 
-      <div className="mt-3 w-full">
-        <label htmlFor="quantity" className="text-gray-500">
-          Quantity:
-        </label>
-
-        <div className="mt-1 flex w-1/2 justify-between divide-x rounded bg-gray-100 text-slate-500">
-          <button className="flex w-1/3 cursor-pointer items-center justify-center py-2 text-2xl">
-            <FaMinus />
-          </button>
-          <span className="flex w-1/3 items-center justify-center py-2 text-lg">
-            {quantity}
-          </span>
-          <button className="flex w-1/3 cursor-pointer items-center justify-center py-2 text-xl">
-            <FaPlus />
-          </button>
-        </div>
-
-        <button className="button-primary mt-5 text-white">Add to Cart</button>
-      </div>
+      <Actions productData={data} />
     </div>
   );
 }

@@ -5,7 +5,7 @@ import Footer from "@/components/shared/Footer/Footer";
 import Navbar from "@/components/shared/Navbar/Navbar";
 import { Suspense } from "react";
 import { Toaster } from "react-hot-toast";
-import CartProvider from "./providers/CartProvider";
+import CartProvider from "../providers/CartProvider";
 
 const neuzeitGrotesk = localFont({
   src: [
