@@ -16,26 +16,30 @@ export default function ProfileNav() {
       <Link href="./">
         <Button
           variant={pathname === "/profile" ? "secondary" : "ghost"}
-          className={cn("cursor-pointer rounded-full !px-5 text-xl")}
+          className={cn(
+            "cursor-pointer rounded-full !px-5 text-xl",
+            pathname === "/profile" && "font-bold",
+          )}
         >
           <FaHistory />
           <span className="ml-1">Order History</span>
         </Button>
       </Link>
-
       <Link href="/profile/addresses">
         <Button
           variant={pathname === "/profile/addresses" ? "secondary" : "ghost"}
-          className="cursor-pointer rounded-full !px-5 text-xl"
+          className={cn(
+            "cursor-pointer rounded-full !px-5 text-xl",
+            pathname === "/profile/addresses" && "font-bold",
+          )}
         >
           <FaAddressBook />
           <span className="ml-1">Addresses</span>
         </Button>
       </Link>
-
       <Button
         variant="ghost"
-        className="cursor-pointer rounded-full !px-5 text-xl"
+        className={cn("cursor-pointer rounded-full !px-5 text-xl")}
       >
         <LuLogOut />
         <span className="ml-1">Log Out</span>

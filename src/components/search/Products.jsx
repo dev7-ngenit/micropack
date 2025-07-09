@@ -1,3 +1,4 @@
+import NoContent from "@/components/shared/NoContent/NoContent";
 import {
   ProductCard,
   ProductDescription,
@@ -6,7 +7,6 @@ import {
   ProductTitle,
 } from "@/components/shared/ProductCard/ProductCard";
 import Link from "next/link";
-import NoContent from "../shared/NoContent/NoContent";
 
 export default async function Products({ products }) {
   return !products?.length ? (
