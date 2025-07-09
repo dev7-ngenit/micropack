@@ -2,7 +2,7 @@
 
 import AuthLayout from "@/components/(auth)/AuthLayout/AuthLayout";
 import Button from "@/components/(auth)/Button/Button";
-import FormField from "@/components/(auth)/FormField/FormField";
+import FormField from "@/components/shared/FormField/FormField";
 import Link from "next/link";
 import { Suspense, useState } from "react";
 

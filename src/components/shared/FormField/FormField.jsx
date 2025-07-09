@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { Eye, EyeOff } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Eye, EyeOff } from "lucide-react";
+import { useState } from "react";
 
 const FormField = ({
   label,
@@ -20,7 +20,7 @@ const FormField = ({
   };
 
   return (
-    <div className="mb-4">
+    <div className="mb-4 w-full">
       <label
         htmlFor={id}
         className="mb-1 block text-sm font-medium text-gray-700"

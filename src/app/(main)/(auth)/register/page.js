@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
-import React, { useState } from "react";
 import AuthLayout from "@/components/(auth)/AuthLayout/AuthLayout";
-import FormField from "@/components/(auth)/FormField/FormField";
 import Button from "@/components/(auth)/Button/Button";
+import FormField from "@/components/shared/FormField/FormField";
+import Link from "next/link";
+import { useState } from "react";
 
 export default function Page() {
   const [formData, setFormData] = useState({
