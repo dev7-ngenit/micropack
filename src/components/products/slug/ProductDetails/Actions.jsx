@@ -1,26 +1,41 @@
 "use client";
 
 import useCart from "@/hooks/useCart";
+import { cartActions } from "@/reducers/cartReducer";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { FaMinus, FaPlus } from "react-icons/fa6";
 
-export default function Actions({ productData }) {
+export default function Actions({
+  productData,
+  selectedVariant,
+  selectedAccessories,
+}) {
   const [quantity, setQuantity] = useState(1);
 
   const { dispatch } = useCart();
 
-  console.log(productData);
-
   const handleAddToCart = () => {
     dispatch({
       type: cartActions.addToCart,
-      payload: { ...productData, quantity },
+      payload: {
+        id: productData.id,
+        slug: productData.slug,
+        color: productData?.images?.[selectedVariant.index]?.color,
+        price:
+          productData.images?.[selectedVariant.index]?.price ||
+          productData.price,
+        accessories: selectedAccessories,
+        quantity,
+      },
     });
+
+    toast.success("Product added to cart");
   };
 
   return (
     <div className="mt-3 w-full">
-      <label htmlFor="quantity" className="text-gray-500">
+      <label htmlFor="quantity" className="text-lg text-gray-500">
         Quantity:
       </label>
 
