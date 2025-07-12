@@ -4,9 +4,7 @@ export default async function page() {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_ORIGIN}/v1/terms-and-condition`,
     {
-      next: {
-        revalidate: 60 * 60 * 24,
-      },
+      cache: "no-store",
     },
   );
   const { data } = await response.json();
@@ -17,7 +15,10 @@ export default async function page() {
         Terms and Conditions
       </Title>
 
-      <article className="prose mt-10 max-w-full">{data?.content}</article>
+      <article
+        className="prose mt-10 max-w-full"
+        dangerouslySetInnerHTML={{ __html: data?.content }}
+      ></article>
     </main>
   );
 }
