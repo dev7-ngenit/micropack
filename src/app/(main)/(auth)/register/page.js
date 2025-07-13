@@ -3,19 +3,25 @@
 import AuthLayout from "@/components/(auth)/AuthLayout/AuthLayout";
 import Button from "@/components/(auth)/Button/Button";
 import FormField from "@/components/shared/FormField/FormField";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Page() {
   const [formData, setFormData] = useState({
-    name: "",
+    fname: "",
+    lname: "",
     email: "",
     password: "",
+    customerType: "customer",
     confirmPassword: "",
     agreeToTerms: false,
   });
 
   const [errors, setErrors] = useState({});
+  const axios = useAxiosSecure();
+  const router = useRouter();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -37,8 +43,11 @@ export default function Page() {
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
+    if (!formData.fname.trim()) {
+      newErrors.name = "First name is required";
+    }
+    if (!formData.lname.trim()) {
+      newErrors.name = "Last name is required";
     }
 
     if (!formData.email) {
@@ -65,17 +74,31 @@ export default function Page() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrors({});
 
     if (validateForm()) {
-      // In a real app, you would handle the registration here
-      console.log("Registration form submitted", formData);
+      const data = {
+        first_name: formData.fname,
+        last_name: formData.lname,
+        email: formData.email,
+        password: formData.password,
+        customer_type: formData.customerType,
+      };
 
-      // Simulate API error for demo purposes
-      setErrors({
-        form: "Registration functionality is not implemented in this demo",
-      });
+      try {
+        const res = await axios.post("/v1/register", data);
+
+        if (res.status === 201 && res.data?.status === "success") {
+          router.push("/login");
+        } else {
+          setErrors({ form: "Something went wrong! Please try again." });
+        }
+      } catch (error) {
+        setErrors({ form: error?.response?.data?.message });
+        console.error("Registration failed:", error);
+      }
     }
   };
 
@@ -85,18 +108,22 @@ export default function Page() {
       subtitle="Sign up to get started with Micropack"
     >
       <form onSubmit={handleSubmit}>
-        {errors.form && (
-          <div className="mb-4 rounded-lg border border-red-200 bg-red-50 p-3 text-red-600">
-            {errors.form}
-          </div>
-        )}
-
         <FormField
-          label="Full name"
+          label="First name"
           type="text"
-          id="name"
-          placeholder="John Doe"
-          value={formData.name}
+          id="fname"
+          placeholder="John"
+          value={formData.fname}
+          onChange={handleChange}
+          error={errors.name}
+          required
+        />
+        <FormField
+          label="Last name"
+          type="text"
+          id="lname"
+          placeholder="Doe"
+          value={formData.lname}
           onChange={handleChange}
           error={errors.name}
           required
@@ -135,7 +162,27 @@ export default function Page() {
           required
         />
 
-        <div className="mb-6">
+        <div>
+          <label
+            htmlFor={"customerType"}
+            className="mb-1 block text-sm font-medium text-gray-700"
+          >
+            Customer Type <span className="text-red-500">*</span>
+          </label>
+
+          <select
+            name="customerType"
+            id="customerType"
+            value={formData.customerType}
+            onChange={handleChange}
+            className="rounded-lg border px-2 py-2 text-lg text-gray-500"
+          >
+            <option value="customer">Customer</option>
+            <option value="partner">Partner</option>
+          </select>
+        </div>
+
+        <div className="mt-5 mb-6">
           <div className="flex items-start">
             <div className="flex h-5 items-center">
               <input
@@ -144,7 +191,8 @@ export default function Page() {
                 type="checkbox"
                 checked={formData.agreeToTerms}
                 onChange={handleChange}
-                className="text-primary-600 focus:ring-primary-500 h-4 w-4 rounded border-gray-300"
+                required
+                className="text-primary-600 focus:ring-primary-500 h-4 w-4 rounded border-gray-600"
               />
             </div>
             <div className="ml-3 text-sm">
@@ -164,6 +212,12 @@ export default function Page() {
             </div>
           </div>
         </div>
+
+        {errors?.form && (
+          <div className="my-4 rounded-lg border border-red-200 bg-red-50 p-3 text-red-600">
+            {errors.form}
+          </div>
+        )}
 
         <Button type="submit" variant="primary" className="box-border w-full">
           Create account
