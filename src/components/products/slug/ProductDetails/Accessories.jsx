@@ -4,13 +4,19 @@ import Image from "next/image";
 export default function Accessories({
   products,
   selectedAccessories,
-  setSelectedAccessories = [],
+  setSelectedAccessories,
 }) {
-  const toggleSelectedAccessories = (slug) => {
-    if (selectedAccessories.includes(slug)) {
-      setSelectedAccessories((prev) => prev.filter((item) => item !== slug));
+  function doesAccessoriesExist(id) {
+    return selectedAccessories.find((accessory) => accessory.id === id);
+  }
+
+  const toggleSelectedAccessories = (data) => {
+    if (doesAccessoriesExist(data.id)) {
+      setSelectedAccessories((prev) =>
+        prev.filter((accessory) => accessory.id !== data.id),
+      );
     } else {
-      setSelectedAccessories((prev) => [...prev, slug]);
+      setSelectedAccessories((prev) => [...prev, { ...data, quantity: 1 }]);
     }
   };
 
@@ -26,10 +32,9 @@ export default function Accessories({
               key={id}
               className={cn(
                 "flex grow cursor-pointer items-center gap-x-2 rounded-xl border bg-gray-100 px-3 py-2",
-                selectedAccessories.includes(slug) &&
-                  "border-blue-500 bg-gray-200",
+                doesAccessoriesExist(id) && "border-blue-500 bg-gray-200",
               )}
-              onClick={() => toggleSelectedAccessories(slug)}
+              onClick={() => toggleSelectedAccessories({ id, slug, price })}
             >
               <Image
                 src={thumbnail_image}

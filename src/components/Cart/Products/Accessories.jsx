@@ -9,8 +9,12 @@ import { useEffect, useState } from "react";
 export default function Accessories({ accessories, productId }) {
   return (
     <section className="mt-5 ml-auto w-3/4 space-y-2">
-      {accessories.map((slug) => (
-        <Accessory key={slug} slug={slug} productId={productId} />
+      {accessories.map((accessory) => (
+        <Accessory
+          key={accessory.slug}
+          slug={accessory.slug}
+          productId={productId}
+        />
       ))}
     </section>
   );

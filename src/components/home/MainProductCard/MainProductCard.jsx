@@ -4,8 +4,9 @@ import Link from "next/link";
 
 export default async function MainProductCard() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_ORIGIN}/v1/product/details/baseus-peas-cable-clip-black`,
+    `${process.env.NEXT_PUBLIC_BACKEND_ORIGIN}/v1/product/details/vyvylabs-neck-massage-pillow`,
   );
+
   const { data } = await res.json();
 
   const { thumbnail_image, name, meta_description, slug } = data?.product || {};
