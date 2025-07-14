@@ -74,7 +74,7 @@ export default function Details({
 
       {data?.accessories?.length > 0 && (
         <Accessories
-          accessories={data.accessories}
+          products={data.accessories}
           selectedAccessories={selectedAccessories}
           setSelectedAccessories={setSelectedAccessories}
         />
