@@ -7,10 +7,15 @@ import rmNullishValues from "@/lib/rmNullishValues";
 import { Suspense } from "react";
 
 export default async function page({ searchParams }) {
-  const { query, sortby, ...rest } = (await searchParams) || {};
+  const { query, sortby, category, ...rest } = (await searchParams) || {};
 
   const params = new URLSearchParams(
-    rmNullishValues({ name: query, sort_by: sortby, ...rest }),
+    rmNullishValues({
+      name: query,
+      sort_by: sortby,
+      category_id: category,
+      ...rest,
+    }),
   );
 
   const link = `${process.env.NEXT_PUBLIC_BACKEND_ORIGIN}/v1/products?${params.toString()}`;
