@@ -11,6 +11,7 @@ export default function ProductCarousel({
   images,
   alt,
   activeVariant,
+  baseVariantOnly,
   setActiveVariant,
 }) {
   // State to hold the carousel API instances
@@ -49,7 +50,10 @@ export default function ProductCarousel({
     <section className="relative flex flex-none gap-x-5">
       {/* Main Carousel */}
       <Carousel
-        className="mx-auto w-full max-w-[360px] drop-shadow-2xl sm:max-w-[385px] md:max-w-[37.5rem]"
+        className={cn(
+          "mx-auto max-h-[600px] w-full max-w-[360px] drop-shadow-2xl sm:max-w-[385px] md:max-w-[37.5rem]",
+          baseVariantOnly && "rounded-lg border border-black/10",
+        )}
         key="main-carousel"
         setApi={setMainCarouselApi}
         opts={{

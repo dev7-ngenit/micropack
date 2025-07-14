@@ -19,7 +19,7 @@ export default function MoreProducts({ relatedProducts }) {
           <Product key={index} />
         ))}
       </div> */}
-        <Carousel className="mt-3">
+        <Carousel className="mt-3" opts={{ loop: false, align: "start" }}>
           <CarouselContent>
             {relatedProducts.map((product) => (
               <CarouselItem key={product.id} className="basis-1/4">

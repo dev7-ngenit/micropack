@@ -9,6 +9,7 @@ import { FaMinus, FaPlus } from "react-icons/fa6";
 export default function Actions({
   productData,
   selectedVariant,
+  baseVariantOnly,
   selectedAccessories,
 }) {
   const [quantity, setQuantity] = useState(1);
