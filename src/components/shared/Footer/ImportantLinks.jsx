@@ -1,40 +1,34 @@
 import Link from "next/link";
 
-export default function Support() {
+export default function ImportantLinks() {
   return (
-    <div className="min-w-[200px]">
-      <h4 className="mb-4 text-xl text-white">Support</h4>
+    <div>
+      <h4 className="mb-4 text-xl text-white">Important Links</h4>
 
       <div className="flex flex-col">
         <Link
-          href="/contact-us"
+          href="/about-us"
           className="w-fit cursor-pointer duration-300 hover:text-[#EBEFF1]"
         >
-          Contact Us
+          About Us
         </Link>
         <Link
-          href="/faq"
+          href="/terms-and-conditions"
           className="w-fit cursor-pointer duration-300 hover:text-[#EBEFF1]"
         >
-          FAQ
+          Terms & Conditions
         </Link>
         <Link
-          href="/buying-policy"
+          href="/drivers-download"
           className="w-fit cursor-pointer duration-300 hover:text-[#EBEFF1]"
         >
-          Buying Policy
+          Drivers Download
         </Link>
         <Link
-          href="/refund-policy"
+          href="/ccpa-opt-out"
           className="w-fit cursor-pointer duration-300 hover:text-[#EBEFF1]"
         >
-          Refund Policy
-        </Link>
-        <Link
-          href="/privacy-policy"
-          className="w-fit cursor-pointer duration-300 hover:text-[#EBEFF1]"
-        >
-          Privacy Policy
+          Do Not Sell My Personal Information
         </Link>
       </div>
     </div>
