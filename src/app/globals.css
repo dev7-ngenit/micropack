@@ -132,7 +132,7 @@
 
 @layer utilities {
   .container {
-    @apply mx-auto my-16 md:my-28 w-full md:max-w-[1116px];
+    @apply mx-auto my-16 md:my-28 w-full md:max-w-[1200px];
   }
 
   .button-primary {
