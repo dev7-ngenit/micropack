@@ -4,9 +4,11 @@ import AuthLayout from "@/components/(auth)/AuthLayout/AuthLayout";
 import Button from "@/components/(auth)/Button/Button";
 import FormField from "@/components/shared/FormField/FormField";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
+import { SignUp } from "@clerk/nextjs";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function Page() {
   const [formData, setFormData] = useState({
@@ -92,6 +94,7 @@ export default function Page() {
 
         if (res.status === 201 && res.data?.status === "success") {
           router.push("/login");
+          toast.success("Registration successful! Please log in.");
         } else {
           setErrors({ form: "Something went wrong! Please try again." });
         }
@@ -101,6 +104,12 @@ export default function Page() {
       }
     }
   };
+
+  return (
+    <section className="flex min-h-[calc(100dvh-27.375rem)] items-center justify-center py-10">
+      <SignUp />
+    </section>
+  );
 
   return (
     <AuthLayout

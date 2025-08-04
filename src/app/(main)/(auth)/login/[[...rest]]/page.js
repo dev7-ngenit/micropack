@@ -3,7 +3,12 @@
 import AuthLayout from "@/components/(auth)/AuthLayout/AuthLayout";
 import Button from "@/components/(auth)/Button/Button";
 import FormField from "@/components/shared/FormField/FormField";
+import useAuth from "@/hooks/useAuth";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
+import { authActions } from "@/reducers/authReducer";
+import { SignIn } from "@clerk/nextjs";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const LoginPage = () => {
@@ -14,6 +19,9 @@ const LoginPage = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const axios = useAxiosSecure();
+  const { dispatch } = useAuth();
+  const router = useRouter();
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -48,19 +56,41 @@ const LoginPage = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (validateForm()) {
-      // In a real app, you would handle the login here
-      console.log("Login form submitted", formData);
+      try {
+        const response = await axios.post("/v1/login", {
+          email: formData.email,
+          password: formData.password,
+        });
 
-      // Simulate API error for demo purposes
-      setErrors({
-        form: "Login functionality is not implemented in this demo",
-      });
+        const { data } = response;
+
+        if (formData.rememberMe) {
+          localStorage.setItem("user", JSON.stringify(data.data));
+        }
+
+        dispatch({ type: authActions.LOGIN, payload: data.data });
+
+        router.push("/profile");
+      } catch (error) {
+        console.error("Login error:", error);
+        setErrors({
+          form:
+            error?.response?.data?.message ||
+            "An error occurred while logging in. Please try again.",
+        });
+      }
     }
   };
+
+  return (
+    <section className="flex min-h-[calc(100dvh-27.375rem)] items-center justify-center">
+      <SignIn />
+    </section>
+  );
 
   return (
     <AuthLayout
@@ -68,12 +98,6 @@ const LoginPage = () => {
       subtitle="Sign in to your account to continue"
     >
       <form onSubmit={handleSubmit}>
-        {errors.form && (
-          <div className="mb-4 rounded-lg border border-red-200 bg-red-50 p-3 text-red-600">
-            {errors.form}
-          </div>
-        )}
-
         <FormField
           label="Email address"
           type="email"
@@ -121,6 +145,12 @@ const LoginPage = () => {
             Forgot password?
           </Link>
         </div>
+
+        {errors.form && (
+          <div className="mb-4 rounded-lg border border-red-200 bg-red-50 p-3 text-red-600">
+            {errors.form}
+          </div>
+        )}
 
         <Button type="submit" className="box-border w-full">
           Sign in

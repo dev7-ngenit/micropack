@@ -5,6 +5,7 @@ import Footer from "@/components/shared/Footer/Footer";
 import Navbar from "@/components/shared/Navbar/Navbar";
 import AuthProvider from "@/providers/AuthProvider";
 import CartProvider from "@/providers/CartProvider";
+import { ClerkProvider } from "@clerk/nextjs";
 import { Suspense } from "react";
 import { Toaster } from "react-hot-toast";
 
@@ -40,18 +41,21 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={`${neuzeitGrotesk.className} bg-[#EBEFF1] antialiased`}>
-        <AuthProvider>
-          <CartProvider>
-            <Navbar />
-            <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
-            <Footer />
-          </CartProvider>
-        </AuthProvider>
-
-        <Toaster position="top-right" reverseOrder={false} />
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body
+          className={`${neuzeitGrotesk.className} bg-[#EBEFF1] antialiased`}
+        >
+          <AuthProvider>
+            <CartProvider>
+              <Navbar />
+              <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
+              <Footer />
+            </CartProvider>
+          </AuthProvider>
+          <Toaster position="top-right" reverseOrder={false} />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
