@@ -2,7 +2,7 @@ import ProductCTA from "../ProductCTA/ProductCTA";
 
 export default async function ProductCTATwo() {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_ORIGIN}/v1/category/juice-blender`,
+    `${process.env.NEXT_PUBLIC_BACKEND_ORIGIN}/v1/category/gadgets-smart-appliances`,
   );
   const { data } = await response.json();
   const { banner_image, name } = data || {};

@@ -20,7 +20,7 @@ export default async function Copyright() {
         {!!data?.address_line_one && (
           <p>
             Address:{" "}
-            <span className="text-sm underline">{`${data?.address_line_one}, ${data?.address_line_two}`}</span>
+            <span className="text-sm">{`${data?.address_line_one}, ${data?.address_line_two}`}</span>
           </p>
         )}
 

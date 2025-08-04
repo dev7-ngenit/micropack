@@ -2,7 +2,7 @@ import ProductCarousel from "../ProductCarousel/ProductCarousel";
 
 export default async function CarouselSectionTwo() {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_ORIGIN}/v1/category/neck-pillow`,
+    `${process.env.NEXT_PUBLIC_BACKEND_ORIGIN}/v1/category/charging-power-solutions`,
   );
   const { data } = await response.json();
 

@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default async function MainProductCard() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_ORIGIN}/v1/product/details/vyvylabs-neck-massage-pillow`,
+    `${process.env.NEXT_PUBLIC_BACKEND_ORIGIN}/v1/product/details/vyvylabs-elite-series-two-for-two-fast-charging-cable-uc-to-cl-100w-12m-black`,
   );
 
   const { data } = await res.json();
