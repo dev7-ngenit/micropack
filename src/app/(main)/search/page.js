@@ -1,8 +1,7 @@
 import PaginationCom from "@/components/search/PaginationCom";
 import Products from "@/components/search/Products";
 import SearchNav from "@/components/search/SearchNav";
-import Sidebar from "@/components/search/Sidebar";
-import Title from "@/components/shared/Title/Title";
+import Sidebar from "@/components/search/Sidebar/Sidebar";
 import rmNullishValues from "@/lib/rmNullishValues";
 import { Suspense } from "react";
 
@@ -26,17 +25,11 @@ export default async function page({ searchParams }) {
   const { current_page, total, data, per_page } = await response.json();
 
   return (
-    <main className="container !mt-10 box-border px-5 md:!my-16 md:box-content md:min-h-[calc(100dvh-33rem)]">
-      {query && (
-        <Title className="text-4xl [background-position-y:70%]">
-          Searched for “{query}”
-        </Title>
-      )}
-
+    <main className="!md:my-0 container !my-0 box-border px-5 md:box-content md:min-h-[calc(100dvh-33rem)]">
       <SearchNav totalResults={total} sortBy={sortby} />
 
       <Suspense fallback={<div>Loading...</div>}>
-        <section className="mt-9 flex items-start gap-x-12">
+        <section className="my-9 flex items-start gap-x-8">
           <Sidebar />
 
           <section className="grow">

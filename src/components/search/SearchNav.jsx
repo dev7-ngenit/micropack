@@ -6,7 +6,7 @@ export default function SearchNav({ totalResults, sortBy }) {
   return (
     <nav
       className={cn(
-        "mt-10 flex h-24 items-center bg-white shadow-[0_0_0_100vmax_#ffffff] [clip-path:_inset(0_-100vmax)]",
+        "flex h-24 items-center bg-white shadow-[0_0_0_100vmax_#ffffff] [clip-path:_inset(0_-100vmax)]",
         totalResults ? "justify-between" : "justify-end",
       )}
     >

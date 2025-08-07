@@ -19,7 +19,7 @@ function AccordionItem({ className, ...props }) {
   );
 }
 
-function AccordionTrigger({ className, children, ...props }) {
+function AccordionTrigger({ className, children, hasIcon = false, ...props }) {
   return (
     <AccordionPrimitive.Header className="flex">
       <AccordionPrimitive.Trigger
@@ -31,7 +31,10 @@ function AccordionTrigger({ className, children, ...props }) {
         {...props}
       >
         {children}
-        <Plus className="pointer-events-none size-4 shrink-0 translate-y-0.5 text-muted-foreground transition-transform duration-200" />
+
+        {hasIcon || (
+          <Plus className="pointer-events-none size-4 shrink-0 translate-y-0.5 text-muted-foreground transition-transform duration-200" />
+        )}
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
   );
