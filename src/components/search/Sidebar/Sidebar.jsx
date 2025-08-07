@@ -4,6 +4,7 @@ import { Accordion } from "@/components/ui/accordion";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import Availability from "./Availability";
+import Brands from "./Brands";
 import Categories from "./Categories";
 import PriceSelector from "./PriceSelector";
 
@@ -42,9 +43,11 @@ export default function Sidebar() {
       <Accordion
         type="multiple"
         className="w-full"
-        defaultValue={["category", "availability", "price"]}
+        defaultValue={["category", "brands", "availability", "price"]}
       >
         <Categories />
+
+        <Brands />
 
         <Availability
           stockStatus={stockStatus}
