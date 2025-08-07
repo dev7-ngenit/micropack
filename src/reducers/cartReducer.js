@@ -17,6 +17,7 @@ export const cartActions = {
   increaseQuantity: "INCREASE_QUANTITY",
   decreaseQuantity: "DECREASE_QUANTITY",
   removeFromCart: "REMOVE_FROM_CART",
+  addProductAccessories: "ADD_PRODUCT_ACCESSORIES",
   removeProductAccessories: "REMOVE_PRODUCT_ACCESSORIES",
 };
 
@@ -27,20 +28,20 @@ export default function cartReducer(state, action) {
     }
 
     case cartActions.addToCart: {
-      const existingItem = state.find((item) => item.id === action.payload.id);
+      const existingItem = state.find(
+        (item) =>
+          item.id === action.payload.id && item.color === action.payload.color,
+      );
 
       let nextState;
 
       if (existingItem?.id) {
         nextState = state.map((item) =>
-          item.id === action.payload.id
+          item.id === action.payload.id && item.color === action.payload.color
             ? {
                 ...item,
                 quantity: item.quantity + (action.payload?.quantity || 1),
-                accessories: [
-                  ...item.accessories,
-                  ...action.payload?.accessories,
-                ],
+                accessories: [...action.payload?.accessories],
               }
             : item,
         );
@@ -81,7 +82,27 @@ export default function cartReducer(state, action) {
     }
 
     case cartActions.removeFromCart: {
-      const nextState = state.filter((item) => item.id !== action.payload.id);
+      const nextState = state.filter(
+        (item) =>
+          item.id !== action.payload.id && item.color !== action.payload.color,
+      );
+
+      localStorage.setItem("cart", JSON.stringify(nextState));
+      return nextState;
+    }
+
+    case cartActions.addProductAccessories: {
+      const nextState = state.map((item) =>
+        item.id === action.payload.productId
+          ? {
+              ...item,
+              accessories: [
+                ...item.accessories,
+                { ...action.payload.accessory, quantity: 1 },
+              ],
+            }
+          : item,
+      );
 
       localStorage.setItem("cart", JSON.stringify(nextState));
       return nextState;

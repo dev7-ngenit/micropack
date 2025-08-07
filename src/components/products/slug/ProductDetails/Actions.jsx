@@ -1,37 +1,24 @@
 "use client";
 
-import useCart from "@/hooks/useCart";
-import { cartActions } from "@/reducers/cartReducer";
-import { useState } from "react";
-import toast from "react-hot-toast";
 import { FaMinus, FaPlus } from "react-icons/fa6";
 
 export default function Actions({
   productData,
+  quantity,
+  setQuantity,
   selectedVariant,
-  baseVariantOnly,
-  selectedAccessories,
+  handleAddToCart,
 }) {
-  const [quantity, setQuantity] = useState(1);
+  const onAddToCart = () => {
+    const data = {
+      id: productData.id,
+      slug: productData.slug,
+      color: productData?.images?.[selectedVariant.index]?.color,
+      price:
+        productData.images?.[selectedVariant.index]?.price || productData.price,
+    };
 
-  const { dispatch } = useCart();
-
-  const handleAddToCart = () => {
-    dispatch({
-      type: cartActions.addToCart,
-      payload: {
-        id: productData.id,
-        slug: productData.slug,
-        color: productData?.images?.[selectedVariant.index]?.color,
-        price:
-          productData.images?.[selectedVariant.index]?.price ||
-          productData.price,
-        accessories: selectedAccessories,
-        quantity,
-      },
-    });
-
-    toast.success("Product added to cart");
+    handleAddToCart(data);
   };
 
   return (
@@ -60,7 +47,7 @@ export default function Actions({
 
       <button
         className="button-primary mt-5 cursor-pointer text-white"
-        onClick={handleAddToCart}
+        onClick={onAddToCart}
       >
         Add to Cart
       </button>

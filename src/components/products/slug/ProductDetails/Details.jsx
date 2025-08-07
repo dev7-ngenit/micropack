@@ -1,7 +1,12 @@
+"use client";
+
+import useCart from "@/hooks/useCart";
 import { cn } from "@/lib/utils";
+import { cartActions } from "@/reducers/cartReducer";
 import Image from "next/image";
 import { useState } from "react";
-import Accessories from "./Accessories";
+import toast from "react-hot-toast";
+import Accessories from "./Accessories/Accessories";
 import Actions from "./Actions";
 
 export default function Details({
@@ -10,9 +15,44 @@ export default function Details({
   setActiveVariant,
   baseVariantOnly,
 }) {
-  const { name, images, price } = data || {};
+  const { id, name, images, price } = data || {};
 
-  const [selectedAccessories, setSelectedAccessories] = useState([]);
+  const { cart, dispatch } = useCart();
+  const existedProduct = cart.find((item) => item.id === id);
+
+  const [quantity, setQuantity] = useState(existedProduct?.quantity || 1);
+  const [selectedAccessories, setSelectedAccessories] = useState(
+    existedProduct?.accessories || [],
+  );
+
+  const handleToggleSelectedAccessories = (data) => {
+    const exists = !!selectedAccessories?.find(
+      (accessory) => accessory.id === data.id,
+    );
+
+    if (exists) {
+      setSelectedAccessories(
+        selectedAccessories.filter((accessory) => accessory.id !== data.id),
+      );
+    } else {
+      setSelectedAccessories([...selectedAccessories, data]);
+    }
+  };
+
+  const handleAddToCart = (data) => {
+    const payload = {
+      ...data,
+      quantity,
+      accessories: selectedAccessories,
+    };
+
+    dispatch({
+      type: cartActions.addToCart,
+      payload,
+    });
+
+    toast.success("Product added to cart");
+  };
 
   return (
     <div className="px-3">
@@ -68,15 +108,17 @@ export default function Details({
 
       <Actions
         productData={data}
+        quantity={quantity}
+        setQuantity={setQuantity}
         selectedVariant={activeVariant}
-        selectedAccessories={selectedAccessories}
+        handleAddToCart={handleAddToCart}
       />
 
       {data?.accessories?.length > 0 && (
         <Accessories
-          products={data.accessories}
+          accessories={data?.accessories}
           selectedAccessories={selectedAccessories}
-          setSelectedAccessories={setSelectedAccessories}
+          handleToggleSelectedAccessories={handleToggleSelectedAccessories}
         />
       )}
     </div>

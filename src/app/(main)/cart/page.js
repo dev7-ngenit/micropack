@@ -14,7 +14,7 @@ export default function CartPage() {
       <section className="mt-0 flex flex-col gap-x-16 md:mt-10 md:flex-row">
         <Products cart={cart} dispatch={dispatch} />
 
-        {!!cart.length && <Subtotal cart={cart} />}
+        {!!cart?.length && <Subtotal cart={cart} />}
       </section>
     </main>
   );

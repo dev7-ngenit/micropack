@@ -1,15 +1,15 @@
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import useCart from "@/hooks/useCart";
 import { cartActions } from "@/reducers/cartReducer";
-import { X } from "lucide-react";
+import { Minus, Plus, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function Accessories({ accessories, productId }) {
   return (
-    <section className="mt-5 ml-auto w-3/4 space-y-2">
-      {accessories.map((accessory) => (
+    <section className="mt-5 ml-auto w-4/5 space-y-2">
+      {accessories?.map((accessory) => (
         <Accessory
           key={accessory.slug}
           slug={accessory.slug}
@@ -68,7 +68,24 @@ function Accessory({ slug, productId }) {
           </Link>
         </div>
       </div>
-      <div className="mt-4 flex w-full grow flex-wrap items-center justify-between md:mt-0 md:ml-4 md:w-auto">
+      <div className="flex items-center overflow-hidden rounded-full border border-gray-300">
+        <button
+          type="button"
+          className="cursor-pointer p-2 transition-colors hover:bg-gray-100"
+          // onClick={decreaseQuantity}
+        >
+          <Minus size={16} />
+        </button>
+        <span className="w-4 px-4 py-1 text-center">{5}</span>
+        <button
+          type="button"
+          className="cursor-pointer p-2 transition-colors hover:bg-gray-100"
+          // onClick={increaseQuantity}
+        >
+          <Plus size={16} />
+        </button>
+      </div>
+      <div className="mt-4 flex w-full max-w-[150px] grow flex-wrap items-center justify-between md:mt-0 md:w-auto">
         <p className="ml-4">${parseFloat(productData?.price).toFixed(2)}</p>
 
         <button

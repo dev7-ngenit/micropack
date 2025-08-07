@@ -5,12 +5,14 @@ import { useState } from "react";
 export default function Subtotal({ cart }) {
   const [specialInstructions, setSpecialInstructions] = useState("");
 
+  console.log(cart);
+
   const subtotal = cart.reduce((acc, product) => {
     // Calculate the total for the current product
     const productTotal = product.price * product.quantity;
 
     // Calculate the total for all accessories of the current product
-    const accessoriesTotal = product.accessories.reduce(
+    const accessoriesTotal = product?.accessories?.reduce(
       (accAccessories, accessory) => {
         return accAccessories + accessory.price * accessory.quantity;
       },
