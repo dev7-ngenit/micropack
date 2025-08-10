@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaHistory } from "react-icons/fa";
@@ -10,6 +11,9 @@ import { LuLogOut } from "react-icons/lu";
 
 export default function ProfileNav() {
   const pathname = usePathname();
+  const { isSignedIn, user, isLoaded } = useUser();
+
+  console.log(user);
 
   return (
     <div className="mt-10 space-x-3">
