@@ -6,7 +6,7 @@ import Support from "./Support";
 export default function Footer() {
   return (
     <footer className="border-t-[3px] border-[#FBCF00] bg-[#091C25] pt-14 pb-10 text-[#59666C] md:h-[260px]">
-      <div className="mx-auto flex justify-between gap-x-10 gap-y-14 border-b border-[#59666C] px-5 pb-11 text-lg font-semibold md:w-6xl md:grid-cols-4">
+      <div className="mx-auto flex flex-col justify-between gap-x-10 gap-y-14 border-b border-[#59666C] px-5 pb-11 text-lg font-semibold md:w-6xl md:flex-row">
         <Support />
 
         <ImportantLinks />
