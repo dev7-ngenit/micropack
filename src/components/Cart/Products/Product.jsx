@@ -19,7 +19,7 @@ export default function Product({ product, dispatch }) {
     } else {
       dispatch({
         type: cartActions.increaseQuantity,
-        payload: { id },
+        payload: { id, color },
       });
     }
   };
@@ -30,7 +30,7 @@ export default function Product({ product, dispatch }) {
     } else {
       dispatch({
         type: cartActions.decreaseQuantity,
-        payload: { id },
+        payload: { id, color },
       });
     }
   };
@@ -118,7 +118,7 @@ export default function Product({ product, dispatch }) {
         </div>
       </div>
 
-      <Accessories productId={id} accessories={accessories} />
+      <Accessories productId={id} color={color} accessories={accessories} />
     </div>
   );
 }

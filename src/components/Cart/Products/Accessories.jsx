@@ -5,14 +5,16 @@ import { Minus, Plus, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
-export default function Accessories({ accessories, productId }) {
+export default function Accessories({ accessories, color, productId }) {
   return (
     <section className="mt-5 ml-auto w-4/5 space-y-2">
       {accessories?.map((accessory) => (
         <Accessory
           key={accessory.slug}
-          slug={accessory.slug}
+          color={color}
+          accessory={accessory}
           productId={productId}
         />
       ))}
@@ -20,10 +22,35 @@ export default function Accessories({ accessories, productId }) {
   );
 }
 
-function Accessory({ slug, productId }) {
+function Accessory({ accessory, color, productId }) {
+  const { slug } = accessory;
+
   const [productData, setProductData] = useState({});
   const axios = useAxiosSecure();
   const { dispatch } = useCart();
+
+  const updateAccessoriesQuantity = (type) => {
+    const nextQuantity =
+      type === "increment"
+        ? (accessory?.quantity || 1) + 1
+        : (accessory?.quantity || 1) - 1;
+
+    if (type === "increment" && nextQuantity >= parseInt(productData.qty)) {
+      return toast.error("Reached stock quantity");
+    } else if (type === "decrement" && nextQuantity === 0) {
+      return toast.error("Quantity cannot be less than 1");
+    }
+
+    dispatch({
+      type: cartActions.updateProductAccessoryQuantity,
+      payload: {
+        slug,
+        color,
+        id: productId,
+        quantity: nextQuantity,
+      },
+    });
+  };
 
   const handleRemoveProductAccessories = () => {
     dispatch({
@@ -72,21 +99,28 @@ function Accessory({ slug, productId }) {
         <button
           type="button"
           className="cursor-pointer p-2 transition-colors hover:bg-gray-100"
-          // onClick={decreaseQuantity}
+          onClick={() => updateAccessoriesQuantity("decrement")}
         >
           <Minus size={16} />
         </button>
-        <span className="w-4 px-4 py-1 text-center">{5}</span>
+        <span className="w-4 px-4 py-1 text-center">
+          {accessory?.quantity || 1}
+        </span>
         <button
           type="button"
           className="cursor-pointer p-2 transition-colors hover:bg-gray-100"
-          // onClick={increaseQuantity}
+          onClick={() => updateAccessoriesQuantity("increment")}
         >
           <Plus size={16} />
         </button>
       </div>
       <div className="mt-4 flex w-full max-w-[150px] grow flex-wrap items-center justify-between md:mt-0 md:w-auto">
-        <p className="ml-4">${parseFloat(productData?.price).toFixed(2)}</p>
+        <p className="ml-4">
+          $
+          {(
+            (accessory?.quantity || 1) * parseFloat(productData?.price)
+          ).toFixed(2)}
+        </p>
 
         <button
           type="button"

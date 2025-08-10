@@ -1,3 +1,4 @@
+import { useId } from "react";
 import { FaArrowLeft } from "react-icons/fa6";
 
 import Link from "next/link";
@@ -7,9 +8,10 @@ export default function Products({ cart, dispatch }) {
   return (
     <section className="mt-5 box-border grow md:mt-0">
       {cart?.length ? (
-        cart.map((product) => (
-          <Product key={product.id} product={product} dispatch={dispatch} />
-        ))
+        cart.map((product) => {
+          const key = useId();
+          return <Product key={key} product={product} dispatch={dispatch} />;
+        })
       ) : (
         <p>No products found in cart</p>
       )}

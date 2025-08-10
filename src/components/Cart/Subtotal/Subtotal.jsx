@@ -1,11 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 export default function Subtotal({ cart }) {
   const [specialInstructions, setSpecialInstructions] = useState("");
-
-  console.log(cart);
 
   const subtotal = cart.reduce((acc, product) => {
     // Calculate the total for the current product
@@ -51,9 +50,12 @@ export default function Subtotal({ cart }) {
         />
       </div>
 
-      <button className="button-primary box-border w-full cursor-pointer py-3 text-xl font-medium text-white">
-        Check out
-      </button>
+      <Link
+        href="/checkout"
+        className="button-primary box-border w-full cursor-pointer py-3 text-xl font-medium text-white"
+      >
+        Checkout
+      </Link>
     </div>
   );
 }

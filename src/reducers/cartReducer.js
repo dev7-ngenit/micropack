@@ -18,6 +18,7 @@ export const cartActions = {
   decreaseQuantity: "DECREASE_QUANTITY",
   removeFromCart: "REMOVE_FROM_CART",
   addProductAccessories: "ADD_PRODUCT_ACCESSORIES",
+  updateProductAccessoryQuantity: "UPDATE_PRODUCT_ACCESSORY_QUANTITY",
   removeProductAccessories: "REMOVE_PRODUCT_ACCESSORIES",
 };
 
@@ -55,7 +56,7 @@ export default function cartReducer(state, action) {
 
     case cartActions.increaseQuantity: {
       const nextState = state.map((item) =>
-        item.id === action.payload.id
+        item.id === action.payload.id && item.color === action.payload.color
           ? {
               ...item,
               quantity: item.quantity + (action.payload?.quantity || 1),
@@ -69,7 +70,7 @@ export default function cartReducer(state, action) {
 
     case cartActions.decreaseQuantity: {
       const nextState = state.map((item) =>
-        item.id === action.payload.id
+        item.id === action.payload.id && item.color === action.payload.color
           ? {
               ...item,
               quantity: item.quantity - (action.payload?.quantity || 1),
@@ -100,6 +101,24 @@ export default function cartReducer(state, action) {
                 ...item.accessories,
                 { ...action.payload.accessory, quantity: 1 },
               ],
+            }
+          : item,
+      );
+
+      localStorage.setItem("cart", JSON.stringify(nextState));
+      return nextState;
+    }
+
+    case cartActions.updateProductAccessoryQuantity: {
+      const nextState = state.map((item) =>
+        item.id === action.payload.id && item.color === action.payload.color
+          ? {
+              ...item,
+              accessories: item.accessories.map((accessory) =>
+                accessory.slug === action.payload.slug
+                  ? { ...accessory, quantity: action.payload.quantity }
+                  : accessory,
+              ),
             }
           : item,
       );
