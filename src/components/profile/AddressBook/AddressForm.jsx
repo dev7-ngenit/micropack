@@ -11,7 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
-import { useAuth } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -29,7 +29,7 @@ export default function AddressForm() {
     defaultAddress: false,
   });
   const [countries, setCountries] = useState([]);
-  const { userId } = useAuth();
+  const { user } = useUser();
   const axios = useAxiosSecure();
   const router = useRouter();
 
@@ -51,7 +51,7 @@ export default function AddressForm() {
     e.preventDefault();
 
     const formData = {
-      user_id: userId,
+      user_email: user.emailAddresses[0].emailAddress,
       first_name: data.firstName,
       last_name: data.lastName,
       company: data.company,
