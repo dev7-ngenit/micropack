@@ -20,14 +20,14 @@ export default async function Page() {
       cache: "no-store",
     },
   );
-  const data = await res.json();
-
-  console.log(data);
+  const { data } = await res.json();
 
   return (
     <Dialog>
       <section className="grid grid-cols-4 gap-4 p-4">
-        <AddressCard />
+        {data.map((address) => (
+          <AddressCard key={address.id} address={address} />
+        ))}
 
         <form>
           <DialogTrigger asChild>

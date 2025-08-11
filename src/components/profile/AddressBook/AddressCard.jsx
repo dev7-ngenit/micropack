@@ -1,7 +1,9 @@
-export default function AddressCard() {
+export default function AddressCard({ address }) {
   return (
     <div className="rounded-lg border border-gray-200 p-4 shadow-sm">
-      <h1 className="text-2xl font-semibold">Delivery Address</h1>
+      <h3 className="text-xl font-semibold">{address?.first_name}</h3>
+      <p>{address?.phone}</p>
+      <p>{address?.first_name}</p>
     </div>
   );
 }
