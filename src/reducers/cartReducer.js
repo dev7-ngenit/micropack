@@ -83,9 +83,10 @@ export default function cartReducer(state, action) {
     }
 
     case cartActions.removeFromCart: {
-      const nextState = state.filter(
-        (item) =>
-          item.id !== action.payload.id && item.color !== action.payload.color,
+      const nextState = state.filter((item) =>
+        item.id === action.payload.id && item.color === action.payload.color
+          ? false
+          : true,
       );
 
       localStorage.setItem("cart", JSON.stringify(nextState));

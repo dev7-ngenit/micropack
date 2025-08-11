@@ -38,7 +38,7 @@ export default function Product({ product, dispatch }) {
   const handleRemoveProductFromCart = () => {
     dispatch({
       type: cartActions.removeFromCart,
-      payload: { id },
+      payload: { id, color },
     });
   };
 
