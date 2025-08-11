@@ -20,6 +20,7 @@ export const cartActions = {
   addProductAccessories: "ADD_PRODUCT_ACCESSORIES",
   updateProductAccessoryQuantity: "UPDATE_PRODUCT_ACCESSORY_QUANTITY",
   removeProductAccessories: "REMOVE_PRODUCT_ACCESSORIES",
+  clearCart: "CLEAR_CART",
 };
 
 export default function cartReducer(state, action) {
@@ -142,6 +143,11 @@ export default function cartReducer(state, action) {
 
       localStorage.setItem("cart", JSON.stringify(nextState));
       return nextState;
+    }
+
+    case cartActions.clearCart: {
+      localStorage.setItem("cart", []);
+      return [];
     }
 
     default: {

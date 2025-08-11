@@ -13,7 +13,7 @@ export default function Subtotal({ cart }) {
     // Calculate the total for all accessories of the current product
     const accessoriesTotal = product?.accessories?.reduce(
       (accAccessories, accessory) => {
-        return accAccessories + accessory.price * accessory.quantity;
+        return accAccessories + accessory.price * (accessory.quantity || 1);
       },
       0,
     );
