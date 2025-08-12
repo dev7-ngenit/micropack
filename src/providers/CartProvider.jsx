@@ -8,7 +8,7 @@ export default function CartProvider({ children }) {
   const [cart, dispatch] = useReducer(cartReducer, []);
 
   useEffect(() => {
-    const cart = JSON.parse(localStorage.getItem("cart"));
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
     if (cart) {
       dispatch({ type: cartActions.loadCart, payload: cart });

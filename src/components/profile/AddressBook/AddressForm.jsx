@@ -12,10 +12,9 @@ import {
 } from "@/components/ui/select";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { useUser } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function AddressForm() {
+export default function AddressForm({ setOpen, setAddresses }) {
   const [data, setData] = useState({
     firstName: "",
     lastName: "",
@@ -31,7 +30,6 @@ export default function AddressForm() {
   const [countries, setCountries] = useState([]);
   const { user } = useUser();
   const axios = useAxiosSecure();
-  const router = useRouter();
 
   useEffect(() => {
     async function fetchCountries() {
@@ -65,12 +63,14 @@ export default function AddressForm() {
     };
 
     try {
-      await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_ORIGIN}/v1/user/delivery-address`,
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_ORIGIN}/v1/user/delivery-address?user_email=${user?.emailAddresses?.[0]?.emailAddress}&is_default=1`,
         formData,
       );
 
-      router.refresh();
+      setAddresses((prev) => [res.data?.data, ...prev]);
+
+      setOpen(false);
     } catch (error) {
       console.log("Error submitting address form:", error);
     }

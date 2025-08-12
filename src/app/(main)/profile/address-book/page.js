@@ -1,3 +1,5 @@
+"use client";
+
 import AddressCard from "@/components/profile/AddressBook/AddressCard";
 import AddressForm from "@/components/profile/AddressBook/AddressForm";
 import { Card, CardDescription } from "@/components/ui/card";
@@ -8,26 +10,54 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { currentUser } from "@clerk/nextjs/server";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
+import { useUser } from "@clerk/nextjs";
+import { useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 
-export default async function Page() {
-  const user = await currentUser();
+export default function Page() {
+  const [addresses, setAddresses] = useState([]);
+  const [open, setOpen] = useState(false);
+  const { user } = useUser();
+  const axios = useAxiosSecure();
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_ORIGIN}/v1/user/delivery-addresses?user_id=${user?.id}`,
-    {
-      cache: "no-store",
-    },
-  );
-  const { data } = await res.json();
+  useEffect(() => {
+    async function fetchUserAddresses() {
+      try {
+        const res = await axios.get(
+          `/v1/user/delivery-addresses?user_email=${user?.emailAddresses?.[0]?.emailAddress}`,
+        );
+
+        if (!res?.data) {
+          throw new Error("No data received from server");
+        }
+
+        const { data } = res?.data;
+        if (!data) {
+          throw new Error("Invalid data structure received");
+        }
+
+        setAddresses(data);
+      } catch (error) {
+        console.error("Error fetching addresses:", error);
+        setAddresses([]);
+      }
+    }
+
+    if (user?.emailAddresses?.[0]?.emailAddress) {
+      fetchUserAddresses();
+    }
+
+    return () => {};
+  }, [axios, user?.emailAddresses]);
 
   return (
-    <Dialog>
-      <section className="grid grid-cols-4 gap-4 p-4">
-        {data.map((address) => (
-          <AddressCard key={address.id} address={address} />
-        ))}
+    <Dialog open={open} onOpenChange={setOpen}>
+      <section className="grid grid-cols-1 gap-4 p-4 md:grid-cols-2 lg:grid-cols-4">
+        {!!addresses?.length &&
+          addresses?.map((address) => (
+            <AddressCard key={address.id} address={address} />
+          ))}
 
         <form>
           <DialogTrigger asChild>
@@ -42,7 +72,7 @@ export default async function Page() {
             <DialogHeader>
               <DialogTitle className="text-2xl">Add a new address</DialogTitle>
             </DialogHeader>
-            <AddressForm />
+            <AddressForm setOpen={setOpen} setAddresses={setAddresses} />
           </DialogContent>
         </form>
       </section>
