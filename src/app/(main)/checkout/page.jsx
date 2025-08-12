@@ -8,7 +8,7 @@ import flattenAccessories from "@/lib/flattenAccessories";
 import { cartActions } from "@/reducers/cartReducer";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 export default function CheckoutPage() {
@@ -26,7 +26,7 @@ export default function CheckoutPage() {
   });
   const axios = useAxiosSecure();
   const { cart, dispatch } = useCart();
-  const { user } = useUser();
+  const { user, isLoaded } = useUser();
   const router = useRouter();
 
   const flattenedCart = flattenAccessories(cart);
@@ -87,13 +87,46 @@ export default function CheckoutPage() {
 
       dispatch({ type: cartActions.clearCart });
 
-      router.push("/profile/order-history");
       toast.success("Order confirmed successfully");
+      router.push("/profile/order-history");
     } catch (error) {
       toast.error("An error occurred while confirming the order.");
       console.error("Error confirming order:", JSON.stringify(error, null, 2));
     }
   };
+
+  useEffect(() => {
+    async function fetchUserDeliveryAddress() {
+      const res = await axios.get(
+        `/v1/user/delivery-addresses?user_email=${user?.emailAddresses?.[0]?.emailAddress}&is_default=1`,
+      );
+      const addressData = res.data?.data?.at(-1);
+      console.log("🚀 ~ fetchUserDeliveryAddress ~ addressData:", addressData);
+
+      if (addressData) {
+        setData({
+          firstName: addressData.first_name || "",
+          lastName: addressData.last_name || "",
+          email:
+            addressData.user_email ||
+            user?.emailAddresses?.[0]?.emailAddress ||
+            "",
+          company: addressData.company || "",
+          addressOne: addressData.address_line1 || "",
+          addressTwo: addressData.address_line2 || "",
+          state: addressData.city || "",
+          country: addressData.country || "",
+          postalCode: addressData.postal_code || "",
+          phone: addressData.phone || "",
+        });
+      }
+    }
+    if (isLoaded) {
+      fetchUserDeliveryAddress();
+    }
+  }, [isLoaded, user, axios]);
+
+  // https://accessories.admin.ngengroup.org/api/v1/user/delivery-addresses?user_email=dev7.ngenit@gmail.com
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-8">
