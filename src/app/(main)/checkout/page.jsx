@@ -53,6 +53,7 @@ export default function CheckoutPage() {
     const orderItems = flattenedCart.map((product) => {
       const orderItem = {
         product_id: product.id,
+        product_slug: product.slug,
         qty: product?.quantity || 1,
         price: parseFloat(product.price),
       };
