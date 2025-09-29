@@ -54,6 +54,17 @@ export default function RootLayout({ children }) {
             </CartProvider>
           </AuthProvider>
           <Toaster position="top-right" reverseOrder={false} />
+
+          <div
+            className="fixed inset-0 -z-1"
+            style={{
+              backgroundImage: `
+        linear-gradient(to right, #e2e8f0 1px, transparent 1px),
+        linear-gradient(to bottom, #e2e8f0 1px, transparent 1px)
+      `,
+              backgroundSize: "20px 30px",
+            }}
+          />
         </body>
       </html>
     </ClerkProvider>
