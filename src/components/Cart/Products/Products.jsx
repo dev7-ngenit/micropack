@@ -20,7 +20,7 @@ export default function Products({ cart, dispatch }) {
       <div className="mt-6">
         <Link
           href="/search"
-          className="flex items-center gap-x-2 text-xl font-medium text-gray-500 transition-colors hover:text-gray-700"
+          className="w-fit flex items-center gap-x-2 text-xl font-medium text-gray-500 transition-colors hover:text-gray-700"
         >
           <FaArrowLeft />
           Continue Shopping

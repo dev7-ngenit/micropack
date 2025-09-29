@@ -1,11 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
 
 export default function Subtotal({ cart }) {
-  const [specialInstructions, setSpecialInstructions] = useState("");
-
   const subtotal = cart.reduce((acc, product) => {
     // Calculate the total for the current product
     const productTotal = product.price * product.quantity;
@@ -21,41 +18,41 @@ export default function Subtotal({ cart }) {
     return acc + productTotal + accessoriesTotal;
   }, 0);
 
+  const tax = subtotal * 0.05;
+  const shipping = 9.99;
+
   return (
-    <div className="mt-10 h-[21.75rem] w-[19.8rem] rounded-lg bg-white px-9 py-7 shadow-lg md:mt-0 md:w-[16.5rem]">
-      <div className="mb-6 flex items-baseline justify-between">
+    <section className="mt-10 w-[19.8rem] rounded-md bg-white px-9 py-7 shadow-lg md:mt-0 md:w-[16.5rem]">
+      <div className="mb-2 flex items-baseline justify-between">
         <h2 className="text-lg font-medium text-gray-900">Subtotal</h2>
         <span className="text-lg font-medium text-gray-900">
           ${subtotal.toFixed(2)}
         </span>
       </div>
 
-      <p className="mb-6 text-gray-500">
-        Taxes and shipping calculated at checkout
-      </p>
-
-      <div className="mb-6">
-        <label
-          htmlFor="special-instructions"
-          className="mb-2 block text-sm font-medium text-gray-700 underline"
-        >
-          Special order instructions:
-        </label>
-        <textarea
-          id="special-instructions"
-          rows={3}
-          className="box-border w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-sky-400 focus:ring-2 focus:ring-sky-400 focus:outline-none"
-          value={specialInstructions}
-          onChange={(e) => setSpecialInstructions(e.target.value)}
-        />
+      <div className="border-t border-gray-200 pt-4">
+        <div className="mb-2 flex justify-between text-sm text-gray-600">
+          <span>Shipping</span>
+          <span>${shipping.toFixed(2)}</span>
+        </div>
+        <div className="mb-4 flex justify-between text-sm text-gray-600">
+          <span>Tax</span>
+          <span>${tax.toFixed(2)}</span>
+        </div>
+        <div className="border-t border-gray-200 pt-2">
+          <div className="flex justify-between text-lg font-semibold text-gray-900">
+            <span>Total</span>
+            <span>${(subtotal + shipping + tax).toFixed(2)}</span>
+          </div>
+        </div>
       </div>
 
       <Link
         href="/checkout"
-        className="button-primary box-border w-full cursor-pointer py-3 text-xl font-medium text-white"
+        className="button-primary mt-10 block w-fit box-border cursor-pointer py-3 mx-auto text-xl font-medium text-white"
       >
         Checkout
       </Link>
-    </div>
+    </section>
   );
 }

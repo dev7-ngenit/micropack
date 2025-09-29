@@ -3,10 +3,12 @@
 import useCart from "@/hooks/useCart";
 import flattenAccessories from "@/lib/flattenAccessories";
 import { ArrowRight, ShoppingBag, Truck } from "lucide-react";
+import { useState } from "react";
 import ProductCard from "./ProductCard";
 
 export default function ProductSummary({ handleConfirmOrder }) {
   const { cart } = useCart();
+  const [specialInstructions, setSpecialInstructions] = useState("");
 
   const flattenedCart = flattenAccessories(cart);
 
@@ -65,6 +67,22 @@ export default function ProductSummary({ handleConfirmOrder }) {
             <span>${(subtotal + shipping + tax).toFixed(2)}</span>
           </div>
         </div>
+      </div>
+
+      <div className="my-6">
+        <label
+          htmlFor="special-instructions"
+          className="mb-2 block font-medium text-gray-700 underline"
+        >
+          Special order instructions:
+        </label>
+        <textarea
+          id="special-instructions"
+          rows={3}
+          className="box-border w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-sky-400 focus:ring-2 focus:ring-sky-400 focus:outline-none"
+          value={specialInstructions}
+          onChange={(e) => setSpecialInstructions(e.target.value)}
+        />
       </div>
 
       {/* Delivery Info */}
