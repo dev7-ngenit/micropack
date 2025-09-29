@@ -154,13 +154,10 @@
 
 @layer utilities {
   .container {
-    @apply mx-auto my-16 md:my-28 w-full md:max-w-[1200px];
+    @apply mx-auto my-16 w-full md:my-28 md:max-w-[1200px];
   }
 
   .button-primary {
-    @apply rounded-full bg-[#2f9ecf] px-5 py-2 hover:bg-[#2A8EBA];
-    box-shadow: rgba(19, 63, 82, 0.3) 0px 2.77725px 5.5545px 0px,
-      rgba(19, 63, 82, 0.15) 0px 5.5545px 11.109px -2.77725px,
-      rgb(30, 101, 132) 0px -2.77725px 0px 0px inset;
+    @apply cursor-pointer rounded-full border border-[#2A8EBA] bg-[#2A8EBA]/70 px-8 py-2 text-sm text-white backdrop-blur-2xl transition duration-200 hover:shadow-lg;
   }
 }
