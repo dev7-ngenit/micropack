@@ -15,7 +15,7 @@ export default function Details({
   setActiveVariant,
   baseVariantOnly,
 }) {
-  const { id, name, images, price } = data || {};
+  const { id, name, images, price, short_description } = data || {};
 
   const { cart, dispatch } = useCart();
   const existedProduct = cart.find((item) => item.id === id);
@@ -57,6 +57,8 @@ export default function Details({
   return (
     <div className="px-3">
       <h2 className="text-2xl font-semibold">{name}</h2>
+
+      <p className="mt-5 text-lg">{short_description}</p>
 
       <p className="mt-5 text-3xl">
         ${baseVariantOnly ? price : images[activeVariant.index]?.price}
@@ -115,11 +117,7 @@ export default function Details({
       />
 
       {data?.accessories?.length > 0 && (
-        <Accessories
-          accessories={data?.accessories}
-          selectedAccessories={selectedAccessories}
-          handleToggleSelectedAccessories={handleToggleSelectedAccessories}
-        />
+        <Accessories accessories={data?.accessories} />
       )}
     </div>
   );

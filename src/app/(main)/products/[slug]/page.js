@@ -17,7 +17,10 @@ export default async function page({ params }) {
         <main className="container !my-16 md:min-h-[calc(100dvh-33rem)]">
           <ProductDetails data={data?.product} />
 
-          <ProductDescription description={data?.product?.long_description} />
+          <ProductDescription
+            description={data?.product?.long_description}
+            specification={data?.product?.specification}
+          />
 
           <MoreProducts relatedProducts={data?.related_products} />
         </main>

@@ -3,7 +3,7 @@
 export default function Error({ reset }) {
   return (
     // global-error must include html and body tags
-    <div>
+    <div className="min-h-screen">
       <h2>Something went wrong!</h2>
       <button onClick={() => reset()}>Try again</button>
     </div>
