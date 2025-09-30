@@ -3,7 +3,6 @@
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { useEffect, useState } from "react";
 import FormField from "../shared/FormField/FormField";
-import { Checkbox } from "../ui/checkbox";
 import {
   Select,
   SelectContent,
@@ -12,12 +11,7 @@ import {
   SelectValue,
 } from "../ui/select";
 
-export default function DeliveryForm({
-  data,
-  setData,
-  billingSameAsShipping = true,
-  setBillingSameAsShipping,
-}) {
+export default function BillingForm({ data, setData }) {
   const [countries, setCountries] = useState([]);
   const axios = useAxiosSecure();
 
@@ -37,13 +31,13 @@ export default function DeliveryForm({
 
   return (
     <form className="rounded-lg bg-white p-6">
-      <h3 className="mb-4 text-xl font-medium text-muted-foreground">
-        Delivery Information:
+      <h3 className="mb-4 text-xl text-muted-foreground font-medium">
+        Billing Information:
       </h3>
       <div className="flex">
         <FormField
           label="First Name"
-          id="first-name"
+          id="billing-first-name"
           placeholder="Enter your first name"
           value={data.firstName}
           onChange={(e) => setData({ ...data, firstName: e.target.value })}
@@ -51,7 +45,7 @@ export default function DeliveryForm({
         />
         <FormField
           label="Last Name"
-          id="last-name"
+          id="billing-last-name"
           placeholder="Enter your last name"
           value={data.lastName}
           onChange={(e) => setData({ ...data, lastName: e.target.value })}
@@ -60,7 +54,7 @@ export default function DeliveryForm({
       </div>
       <FormField
         label="Email"
-        id="email"
+        id="billing-email"
         placeholder="Email"
         type="email"
         value={data.email}
@@ -69,14 +63,14 @@ export default function DeliveryForm({
       />
       <FormField
         label="Company"
-        id="company"
+        id="billing-company"
         placeholder="Company"
         value={data.company}
         onChange={(e) => setData({ ...data, company: e.target.value })}
       />
       <FormField
         label="Address One"
-        id="address-one"
+        id="billing-address-one"
         placeholder="Enter your address"
         value={data.addressOne}
         onChange={(e) => setData({ ...data, addressOne: e.target.value })}
@@ -84,14 +78,14 @@ export default function DeliveryForm({
       />
       <FormField
         label="Address Two"
-        id="address-two"
+        id="billing-address-two"
         placeholder="Enter your address"
         value={data.addressTwo}
         onChange={(e) => setData({ ...data, addressTwo: e.target.value })}
       />
       <FormField
         label="State"
-        id="state"
+        id="billing-state"
         placeholder="Enter your state"
         value={data.state}
         onChange={(e) => setData({ ...data, state: e.target.value })}
@@ -100,14 +94,14 @@ export default function DeliveryForm({
 
       <div className="mb-4">
         <label
-          htmlFor="country"
+          htmlFor="billing-country"
           className="mb-1 block text-sm font-medium text-gray-700"
         >
           Country <span className="text-red-500">*</span>
         </label>
         <Select
-          name="country"
-          id="country"
+          name="billing-country"
+          id="billing-country"
           value={data.country}
           onValueChange={(value) => setData({ ...data, country: value })}
         >
@@ -130,7 +124,7 @@ export default function DeliveryForm({
 
       <FormField
         label="Postal/ZIP code"
-        id="zip-code"
+        id="billing-zip-code"
         type="number"
         placeholder="Enter the postal/ZIP code"
         value={data.postalCode}
@@ -139,23 +133,12 @@ export default function DeliveryForm({
       />
       <FormField
         label="Phone"
-        id="phone"
+        id="billing-phone"
         placeholder="Enter your phone number"
         value={data.phone}
         onChange={(e) => setData({ ...data, phone: e.target.value })}
         required
       />
-
-      <div className="mt-4 flex items-center gap-x-2">
-        <Checkbox
-          id="billing-same"
-          name="billing-same"
-          checked={billingSameAsShipping}
-          onCheckedChange={(val) => setBillingSameAsShipping?.(Boolean(val))}
-          className="focus:ring-primary-500 focus:border-primary-500 block border border-gray-300 font-medium text-gray-700"
-        />
-        <label htmlFor="billing-same">Billing address same as delivery</label>
-      </div>
     </form>
   );
 }
