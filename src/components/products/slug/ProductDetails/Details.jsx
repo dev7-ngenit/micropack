@@ -54,6 +54,21 @@ export default function Details({
     toast.success("Product added to cart");
   };
 
+  const handleAddAccessoryToCart = (data, accessoryQuantity) => {
+    const payload = {
+      ...data,
+      quantity: accessoryQuantity,
+      accessories: [],
+    };
+
+    dispatch({
+      type: cartActions.addToCart,
+      payload,
+    });
+
+    toast.success("Accessory added to cart");
+  };
+
   return (
     <div className="px-3">
       <h2 className="text-2xl font-semibold">{name}</h2>
@@ -117,7 +132,10 @@ export default function Details({
       />
 
       {data?.accessories?.length > 0 && (
-        <Accessories accessories={data?.accessories} />
+        <Accessories
+          accessories={data?.accessories}
+          handleAddToCart={handleAddAccessoryToCart}
+        />
       )}
     </div>
   );

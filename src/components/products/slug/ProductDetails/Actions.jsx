@@ -22,31 +22,33 @@ export default function Actions({
   };
 
   return (
-    <div className="mt-3 w-full">
-      <label htmlFor="quantity" className="text-lg text-gray-500">
-        Quantity:
-      </label>
+    <div className="mt-3 w-full flex items-center gap-x-10">
+      <div>
+        <label htmlFor="quantity" className="text-lg text-gray-500">
+          Quantity:
+        </label>
 
-      <div className="mt-1 flex w-1/2 justify-between divide-x rounded bg-gray-100 text-slate-500">
-        <button
-          className="flex w-1/3 cursor-pointer items-center justify-center py-2 text-2xl"
-          onClick={() => setQuantity((prev) => prev - 1)}
-        >
-          <FaMinus />
-        </button>
-        <span className="flex w-1/3 items-center justify-center py-2 text-lg">
-          {quantity}
-        </span>
-        <button
-          className="flex w-1/3 cursor-pointer items-center justify-center py-2 text-xl"
-          onClick={() => setQuantity((prev) => prev + 1)}
-        >
-          <FaPlus />
-        </button>
+        <div className="mt-1 flex w-[200px] justify-between divide-x rounded bg-gray-100 text-slate-500">
+          <button
+            className="flex w-1/4 cursor-pointer items-center justify-center py-2 text-xl"
+            onClick={() => setQuantity((prev) => prev - 1)}
+          >
+            <FaMinus />
+          </button>
+          <span className="flex w-1/4 grow items-center justify-center py-2 text-xl">
+            {quantity}
+          </span>
+          <button
+            className="flex w-1/4 cursor-pointer items-center justify-center py-2 text-xl"
+            onClick={() => setQuantity((prev) => prev + 1)}
+          >
+            <FaPlus />
+          </button>
+        </div>
       </div>
 
       <button
-        className="button-primary mt-5 cursor-pointer text-white"
+        className="button-primary shrink-0 mt-8 cursor-pointer text-white"
         onClick={onAddToCart}
       >
         Add to Cart

@@ -5,36 +5,21 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import Image from "next/image";
-import Link from "next/link";
+import Accessory from "./Accessory";
 
-export default function Accessories({ accessories }) {
+export default function Accessories({ accessories, handleAddToCart }) {
   return (
     <div className="mt-6">
       <p className="mb-1 text-lg text-gray-500">Related Accessories: </p>
 
-      <Carousel>
+      <Carousel className="-mt-10">
         <CarouselContent>
           {accessories.map((accessory) => (
-            <CarouselItem className="basis-1/4">
-              <Link
-                href={`/products/${accessory?.slug}`}
-                className="border border-gray-200"
-              >
-                <Image
-                  src={accessory?.thumbnail_image}
-                  alt={accessory?.name}
-                  width={150}
-                  height={150}
-                  className="mx-auto size-[150px]"
-                />
-                <div className="p-2">
-                  <p className="mt-1 line-clamp-1">{accessory?.name}</p>
-                  <span className="text-sm text-gray-500">
-                    Price: ${accessory?.price}
-                  </span>
-                </div>
-              </Link>
+            <CarouselItem key={accessory.id} className="basis-1/4 h-fit pl-2" >
+              <Accessory
+                accessory={accessory}
+                handleAddToCart={handleAddToCart}
+              />
             </CarouselItem>
           ))}
         </CarouselContent>
